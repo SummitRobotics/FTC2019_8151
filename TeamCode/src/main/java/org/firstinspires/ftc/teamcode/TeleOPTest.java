@@ -15,6 +15,7 @@ import com.qualcomm.robotcore.util.Range;
 public class TeleOPTest extends LinearOpMode {
 
     double power;
+    final double POWER_MULTIPLIER = 0.25;
     ElapsedTime runtime = new ElapsedTime();
     DcMotor rightDrive;
     DcMotor leftDrive;
@@ -43,15 +44,23 @@ public class TeleOPTest extends LinearOpMode {
             double rightPower;
             double liftPower;
 
+
             double drive = gamepad1.right_trigger;
             double turn = gamepad1.right_stick_x;
             double lift = gamepad1.left_stick_y;
             double goBack = gamepad1.left_trigger;
+            boolean quarterSpeed = gamepad1.right_stick_button;
 
 
             leftPower = Range.clip((drive-goBack) + turn, -1.0, 1.0);
             rightPower = Range.clip((drive-goBack) - turn, -1.0, 1.0);
             liftPower = Range.clip(lift, -1.0, 1.0);
+
+            if (quarterSpeed){
+                leftPower *= POWER_MULTIPLIER;
+                rightPower *= POWER_MULTIPLIER;
+                liftPower *= POWER_MULTIPLIER;
+            }
 
             leftDrive.setPower(leftPower);
             rightDrive.setPower(rightPower);
