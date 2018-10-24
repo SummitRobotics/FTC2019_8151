@@ -1,16 +1,16 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
  * Created by SHS Robotics - Anne on 10/10/2018.
  */
 
-@TeleOp(name="FirstAutonomous", group="Linear Opmode")
+@Autonomous(name="FirstAutonomous", group="Linear Opmode")
 public class FirstAutonomous extends LinearOpMode {
 
     double power;
@@ -53,7 +53,7 @@ public class FirstAutonomous extends LinearOpMode {
                 rightDrive.setPower(.5);
             }
 
-            while (runtime.seconds()> 2.5 && runtime.seconds() <5 && runtime.seconds() <8 && runtime.seconds() < 1.25)
+            while (runtime.seconds()> 2.5 && runtime.seconds() <5 && runtime.seconds() <8 && runtime.seconds() < 1.25);
         }
     }
 }
