@@ -48,6 +48,19 @@ public class CraterAuto extends LinearOpMode {
         rightDrive.setPower(0);
         liftArm.setPower(0);
     }
+    public void turnLeft(){
+        leftDrive.setPower(-TURN_SPEED);
+        rightDrive.setPower(TURN_SPEED);
+    }
+    public void turnRight(){
+        leftDrive.setPower(TURN_SPEED);
+        rightDrive.setPower(-TURN_SPEED);
+    }
+
+    public void goReverse(){
+        leftDrive.setPower(-DRIVE_SPEED);
+        rightDrive.setPower(-DRIVE_SPEED);
+    }
 
 
 
