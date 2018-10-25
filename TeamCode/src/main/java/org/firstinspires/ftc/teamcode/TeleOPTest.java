@@ -1,10 +1,9 @@
 
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.Range;
 
 /**
@@ -17,23 +16,14 @@ public class TeleOPTest extends LinearOpMode {
     double power;
     final double POWER_MULTIPLIER = 0.25;
     ElapsedTime runtime = new ElapsedTime();
-    DcMotor rightDrive;
-    DcMotor leftDrive;
-    DcMotor liftArm;
-
+    //This creates a new hardware map "Robot", which creates all our hardware objects (DcMotors, etc.)
+    Robot Robot = new Robot();
 
     public void runOpMode() {
 
-
-        rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
-        leftDrive = hardwareMap.get(DcMotor.class, "left_drive");
-
-        rightDrive.setDirection(DcMotor.Direction.REVERSE);
-        leftDrive.setDirection(DcMotor.Direction.REVERSE);
-
-        liftArm = hardwareMap.get(DcMotor.class, "lift");
-
-        liftArm.setDirection(DcMotor.Direction.FORWARD);
+        //Example of how to use a Hardwaremap
+        //This line runs the "Init" method in the "Robot" class, setting up all of our motors.
+        Robot.init(hardwareMap);
 
         waitForStart();
         runtime.reset();
@@ -62,9 +52,10 @@ public class TeleOPTest extends LinearOpMode {
                 liftPower *= POWER_MULTIPLIER;
             }
 
-            leftDrive.setPower(leftPower);
-            rightDrive.setPower(rightPower);
-            liftArm.setPower(liftPower);
+            //Set power to the motors defined in the Robot class
+            Robot.leftDrive.setPower(leftPower);
+            Robot.rightDrive.setPower(rightPower);
+            Robot.liftArm.setPower(liftPower);
 
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Motors", "left(%.2f),right(%.2f)", leftPower, rightPower, liftPower);
