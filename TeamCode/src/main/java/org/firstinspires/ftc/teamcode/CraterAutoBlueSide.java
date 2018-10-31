@@ -16,7 +16,7 @@ public class CraterAutoBlueSide extends LinearOpMode {
     protected DcMotor leftDrive;
     protected DcMotor rightDrive;
     protected DcMotor liftArm;
-    private final double DRIVE_SPEED = 0.65;
+    private final double DRIVE_SPEED = 0.5;
     private final double TURN_SPEED = 0.5;
 
     public void runOpMode() {
@@ -33,19 +33,19 @@ public class CraterAutoBlueSide extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            while(runtime.seconds() <= 2){
+            while(runtime.seconds() <= 5){
                 liftArm.setPower(1);
             }
 
-            while (runtime.seconds() <= 2 && runtime.seconds() <= 4.5) {
+            while (runtime.seconds() >= 5 && runtime.seconds() <= 7.5) {
                 moveFwd();
             }
 
-            while (runtime.seconds() <= 2 && runtime.seconds() <= 4.5 && runtime.seconds() <= 7.5){
+            while (runtime.seconds() >= 5 && runtime.seconds() >= 7.5 && runtime.seconds() <= 10.5){
                 turnRight();
             }
 
-            while (runtime.seconds() <= 2 && runtime.seconds() <= 4.5 && runtime.seconds() <= 7.5  && runtime.seconds() <= 12.5){
+            while (runtime.seconds() >= 5 && runtime.seconds() >= 7.5 && runtime.seconds() >= 10.5  && runtime.seconds() <= 15.5){
                 moveFwd();
             }
             robotStop();
