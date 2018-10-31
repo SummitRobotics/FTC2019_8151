@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Created by SHS Robotics - Anne on 10/24/2018.
  */
 
-@Autonomous(name="CraterAutoRedSide", group = "Linear Opmode")
+@Autonomous(name="CraterAutoblueSide", group = "Linear Opmode")
 public class CraterAutoBlueSide extends LinearOpMode {
 
     ElapsedTime runtime = new ElapsedTime();
