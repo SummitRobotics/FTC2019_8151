@@ -5,15 +5,18 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+/**
+ * Created by SHS Robotics - Anne on 10/24/2018.
+ */
 
-@Autonomous(name="CraterAutoTest", group = "Linear Opmode")
-public class CraterAuto extends LinearOpMode {
+@Autonomous(name="CraterAutoRedSide", group = "Linear Opmode")
+public class CraterAutoRedSide extends LinearOpMode {
 
     ElapsedTime runtime = new ElapsedTime();
     protected DcMotor leftDrive;
     protected DcMotor rightDrive;
     protected DcMotor liftArm;
-    private final double DRIVE_SPEED = 0.5;
+    private final double DRIVE_SPEED = 0.65;
     private final double TURN_SPEED = 0.5;
 
     public void runOpMode() {
@@ -30,48 +33,52 @@ public class CraterAuto extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            while (runtime.seconds() <= 2) {
+            while(runtime.seconds() <= 2){
                 liftArm.setPower(1);
             }
 
-            while (runtime.seconds() <= 2 && runtime.seconds() <= 7.5) {
+            while (runtime.seconds() <= 2 && runtime.seconds() <= 4.5) {
                 moveFwd();
             }
 
+            while (runtime.seconds() <= 2 && runtime.seconds() <= 4.5 && runtime.seconds() <= 7.5){
+                turnRight();
+            }
+
+            while (runtime.seconds() <= 2 && runtime.seconds() <= 4.5 && runtime.seconds() <= 7.5 && runtime.seconds() <= 12.5){
+                moveFwd();
+            }
             robotStop();
 
-        }
 
+        }
     }
 
 
-    public void moveFwd(){
+    public void moveFwd() {
         leftDrive.setPower(DRIVE_SPEED);
         rightDrive.setPower(DRIVE_SPEED);
     }
 
-    public void robotStop(){
+    public void robotStop() {
         leftDrive.setPower(0);
         rightDrive.setPower(0);
         liftArm.setPower(0);
     }
-    public void turnLeft(){
+
+    public void turnLeft() {
         leftDrive.setPower(-TURN_SPEED);
         rightDrive.setPower(TURN_SPEED);
     }
-    public void turnRight(){
+
+    public void turnRight() {
         leftDrive.setPower(TURN_SPEED);
         rightDrive.setPower(-TURN_SPEED);
     }
 
-    public void goReverse(){
+    public void goReverse() {
         leftDrive.setPower(-DRIVE_SPEED);
         rightDrive.setPower(-DRIVE_SPEED);
     }
-
-
-
-
-
-
 }
+
