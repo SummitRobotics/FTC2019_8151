@@ -36,6 +36,7 @@ public class CraterAutoBlueSide extends LinearOpMode {
             while(runtime.seconds() <= 5){
                 liftArm.setPower(1);
             }
+            liftArm.setPower(0);
 
             while (runtime.seconds() >= 5 && runtime.seconds() <= 7.5) {
                 turnRight();
