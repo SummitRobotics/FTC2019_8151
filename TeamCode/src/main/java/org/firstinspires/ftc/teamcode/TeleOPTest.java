@@ -27,8 +27,7 @@ public class TeleOPTest extends LinearOpMode {
 
         //Example of how to use a Hardwaremap
         //This line runs the "Init" method in the "Robot" class, setting up all of our motors.
-        Robot.init(hardwareMap);
-    public void runOpMode() {
+            public void runOpMode() {
 
         digitalTouch =hardwareMap.get(DigitalChannel.class, "sensor_digital");
         rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
@@ -39,6 +38,8 @@ public class TeleOPTest extends LinearOpMode {
         digitalTouch.setMode(DigitalChannel.Mode.INPUT);
 
         liftArm = hardwareMap.get(DcMotor.class, "lift");
+
+        liftArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         liftArm.setDirection(DcMotor.Direction.FORWARD);
         intake = hardwareMap.get(DcMotor.class, "uptake");
@@ -75,7 +76,7 @@ public class TeleOPTest extends LinearOpMode {
             }
             // lift power negative when going up positive going down.
             // digital touch state is `true` when not pressed - `false` when pressed.
-            if (!digitalTouch.getState() && Math.signum(liftPower) > 0.0) {
+            if (!digitalTouch.getState() && liftPower > 0.0) {
                 liftPower = 0;
             }
 
@@ -88,6 +89,8 @@ public class TeleOPTest extends LinearOpMode {
             else{
                 intake.setPower(0);
             }
+
+
 
             //Set power to the motors defined in the Robot class
             Robot.leftDrive.setPower(leftPower);

@@ -33,18 +33,29 @@ public class CraterAutoBlueSide extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            while(runtime.seconds() <= 5.5){
+            while(runtime.seconds() <= 5.8){
                 liftArm.setPower(1);
             }
             liftArm.setPower(0);
 
-            while (runtime.seconds() >= 5.5 && runtime.seconds() <= 8) {
+            // Arm runs for 5.8 seconds
+
+            while (runtime.seconds() >= 5.8 && runtime.seconds() <= 6.3) {
                 turnRight();
             }
 
-            while (runtime.seconds() >= 5.5 && runtime.seconds() >= 8 && runtime.seconds() <= 13){
+            while (runtime.seconds() >= 5.8 && runtime.seconds() >= 6.3 && runtime.seconds() <= 7.8){
                 moveFwd();
             }
+
+            while (runtime.seconds() >= 5.8 && runtime.seconds() >= 6.3 && runtime.seconds() >= 7.8 && runtime.seconds() <= 8.3){
+                turnLeft();
+            }
+
+            while (runtime.seconds() >= 5.8 && runtime.seconds() >= 6.3 && runtime.seconds() >= 7.8 && runtime.seconds() >= 8.3 && runtime.seconds() <= 11.3){
+                moveFwd();
+            }
+
             robotStop();
 
 
