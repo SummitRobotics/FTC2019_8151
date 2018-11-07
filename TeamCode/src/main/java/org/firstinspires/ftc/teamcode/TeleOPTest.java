@@ -43,6 +43,12 @@ public class TeleOPTest extends LinearOpMode {
 
         liftArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
         liftArm.setDirection(DcMotor.Direction.FORWARD);
         intake = hardwareMap.get(DcMotor.class, "uptake");
 
@@ -85,10 +91,10 @@ public class TeleOPTest extends LinearOpMode {
             intake();
             outake();
 
-            //Set power to the motors defined in the Robot class
-            Robot.leftDrive.setPower(leftPower);
-            Robot.rightDrive.setPower(rightPower);
-            Robot.liftArm.setPower(liftPower);
+            //Set power to the motors defined in the Robot class. actually, there is no robot class.
+            leftDrive.setPower(leftPower);
+            rightDrive.setPower(rightPower);
+            liftArm.setPower(liftPower);
 
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Motors", "left(%.2f),right(%.2f)", leftPower, rightPower, liftPower);
@@ -105,10 +111,10 @@ public class TeleOPTest extends LinearOpMode {
         }
 
         if(n == 1){
-            Robot.intake.setPower(1);
+            intake.setPower(1);
         }
         else{
-            Robot.intake.setPower(0);
+            intake.setPower(0);
         }
     }
     public void outake(){
@@ -119,10 +125,10 @@ public class TeleOPTest extends LinearOpMode {
         }
 
         if (n == 1){
-            Robot.intake.setPower(-1);
+            intake.setPower(-1);
         }
         else{
-            Robot.intake.setPower(0);
+            intake.setPower(0);
         }
     }
 }
