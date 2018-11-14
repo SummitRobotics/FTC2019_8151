@@ -25,15 +25,17 @@ public class TeleOPTest extends LinearOpMode {
     DcMotor liftArm;
     DcMotor intake;
 
-    double n = 0;
+    double n_one = 0;
+    double n_two = 0;
 
-        //Example of how to use a Hardwaremap
-        //This line runs the "Init" method in the "Robot" class, setting up all of our motors.
+    //Example of how to use a Hardwaremap
+    //This line runs the "Init" method in the "Robot" class, setting up all of our motors.
     public void runOpMode() {
 
         digitalTouch =hardwareMap.get(DigitalChannel.class, "sensor_digital");
         rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
         leftDrive = hardwareMap.get(DcMotor.class, "left_drive");
+        intake = hardwareMap.get(DcMotor.class, "uptake");
 
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
         leftDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -88,8 +90,18 @@ public class TeleOPTest extends LinearOpMode {
                 liftPower = 0;
             }
 
-            intake();
-            outake();
+            //intake();
+            //outake();
+
+            if(intakeButton){
+                intake.setPower(1);
+            }
+            else if (outakeButton){
+                intake.setPower(-1);
+            }
+            else{
+                intake.setPower(0);
+            }
 
             //Set power to the motors defined in the Robot class. actually, there is no robot class.
             leftDrive.setPower(leftPower);
@@ -103,14 +115,14 @@ public class TeleOPTest extends LinearOpMode {
 
         }
     }
-    public void intake(){
+   /* public void intake(){
         boolean intakeButton = gamepad1.dpad_up;
 
         if (intakeButton){
-            n = 1-n;
+            n_one = 1-n_one;
         }
 
-        if(n == 1){
+        if(n_one == 1){
             intake.setPower(1);
         }
         else{
@@ -121,14 +133,14 @@ public class TeleOPTest extends LinearOpMode {
         boolean outakeButton = gamepad1.dpad_down;
 
         if (outakeButton){
-            n = 1-n;
+            n_two = 1-n_two;
         }
 
-        if (n == 1){
+        if (n_two == 1){
             intake.setPower(-1);
         }
         else{
             intake.setPower(0);
         }
-    }
+    }*/
 }
