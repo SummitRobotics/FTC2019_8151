@@ -86,6 +86,7 @@ public class depositAutoandcrater {
         }
 
         public void deposit(){
+
             intake.setPower(-INTAKE_OUT);
         }
     }

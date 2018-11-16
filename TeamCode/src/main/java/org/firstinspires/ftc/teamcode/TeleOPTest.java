@@ -1,12 +1,14 @@
 
 package org.firstinspires.ftc.teamcode;
-
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 import com.qualcomm.robotcore.hardware.DcMotor;
+
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+
 
 /**
  * Created by SHS Robotics - Anne on 10/10/2018.
@@ -67,6 +69,7 @@ public class TeleOPTest extends LinearOpMode {
             double intakePower;
 
 
+
             double drive = gamepad1.right_trigger;
             double turn = gamepad1.right_stick_x;
             double lift = gamepad1.left_stick_y;
@@ -111,6 +114,7 @@ public class TeleOPTest extends LinearOpMode {
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Motors", "left(%.2f),right(%.2f)", leftPower, rightPower, liftPower);
             telemetry.addData( "Button", "Button: " + digitalTouch.getState());
+            telemetry.addData("Distance (cm)", sensorDistanceRange.getDistance (DistanceUnit.CM) );
             telemetry.update();
 
         }
