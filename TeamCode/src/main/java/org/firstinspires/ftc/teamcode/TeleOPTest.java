@@ -2,6 +2,8 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -24,8 +26,8 @@ public class TeleOPTest extends LinearOpMode {
     DcMotor leftDrive;
     DcMotor liftArm;
     DcMotor intake;
-    DcMotor takerHead1;
-    DcMotor takerHead2;
+    CRServo takerHead1;
+    CRServo takerHead2;
 
     double n_one = 0;
     double n_two = 0;
@@ -40,12 +42,13 @@ public class TeleOPTest extends LinearOpMode {
         intake = hardwareMap.get(DcMotor.class, "uptake");
 
         /* "Taker Heads" bot and top Servo */
-        takerHead1 = hardwareMap.get(DcMotor.class, "top_head_drive");
-        takerHead2 = hardwareMap.get(DcMotor.class, "bottom_head_drive");
+        takerHead1 = hardwareMap.get(CRServo.class, "takerHead1");
+        takerHead2 = hardwareMap.get(CRServo.class, "takerHead2");
 
         /* These need to be flipped possible */
         takerHead1.setDirection(DcMotor.Direction.REVERSE);
         takerHead2.setDirection(DcMotor.Direction.FORWARD);
+
 
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
         leftDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -60,10 +63,6 @@ public class TeleOPTest extends LinearOpMode {
         leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-        takerHead1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        takerHead2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
 
         liftArm.setDirection(DcMotor.Direction.FORWARD);
         intake = hardwareMap.get(DcMotor.class, "uptake");
@@ -84,8 +83,8 @@ public class TeleOPTest extends LinearOpMode {
             double drive = gamepad1.right_trigger;
             // Controller Right Joystick
             double turn = gamepad1.right_stick_x;
-            double takerHead = gamepad1.right_stick_y;
-            double takerPower = 0.0;
+            double takerPower = isTakerPower();
+            double takerTilt = gamepad1.right_stick_y;
 
             // Controller Left Joystick
             double lift = gamepad1.left_stick_y;
@@ -100,8 +99,6 @@ public class TeleOPTest extends LinearOpMode {
             rightPower = Range.clip((drive-goBack) - turn, -1.0, 1.0);
             liftPower = Range.clip(lift, -1.0, 1.0);
 
-            takerPower = Range.clip(takerHead, -1.0, 1.0);
-
             takerHead1.setPower(takerPower);
             takerHead2.setPower(takerPower);
 
@@ -115,28 +112,20 @@ public class TeleOPTest extends LinearOpMode {
                 liftPower = 0;
             }
 
-            //intake();
-            //outake();
+            takerHead1.setPower(takerPower);
+            takerHead2.setPower(takerPower);
 
-            if(intakeButton){
-                intake.setPower(1);
-            }
-            else if (outakeButton){
-                intake.setPower(-1);
-            }
-            else{
-                intake.setPower(0);
-            }
 
             //Set power to the motors defined in the Robot class. actually, there is no robot class.
             leftDrive.setPower(leftPower);
             rightDrive.setPower(rightPower);
             liftArm.setPower(liftPower);
+            intake.setPower(takerTilt/2);
 
             telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("Motors", "left(%.2f),right(%.2f)", leftPower, rightPower, liftPower);
+            telemetry.addData("Motors", "left" ,"right", "lift", leftPower, rightPower, liftPower);
             telemetry.addData( "Button", "Button: " + digitalTouch.getState());
-            telemetry.addData( "Taker", "Taker Position: (%.2f), Taker Power (%.2f) ", takerHead, takerPower);
+            telemetry.addData( "Intake Power", takerPower);
             telemetry.update();
 
         }
@@ -169,4 +158,16 @@ public class TeleOPTest extends LinearOpMode {
             intake.setPower(0);
         }
     }*/
+
+    public double isTakerPower(){
+        if(gamepad1.dpad_up){
+            return 1;
+        }
+        else if (gamepad1.dpad_down){
+            return -1;
+        }
+        else{
+            return 0;
+        }
+    }
 }
