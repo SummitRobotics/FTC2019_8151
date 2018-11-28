@@ -60,30 +60,43 @@ public class depositAutoandcrater {
 
         }
 
+        // moves robot forward for a given amount of time
 
         public void moveFwd(){
             leftDrive.setPower(DRIVE_SPEED);
             rightDrive.setPower(DRIVE_SPEED);
         }
 
+        //stops the robot
+
         public void robotStop(){
             leftDrive.setPower(0);
             rightDrive.setPower(0);
             liftArm.setPower(0);
         }
+
+        //turns robot left for given amount of time
+
         public void turnLeft(){
             leftDrive.setPower(-TURN_SPEED);
             rightDrive.setPower(TURN_SPEED);
         }
+
+        //turns robot right for given amount of time
+
         public void turnRight(){
             leftDrive.setPower(TURN_SPEED);
             rightDrive.setPower(-TURN_SPEED);
         }
 
+        //moves robot backwards for a given amount of time
+
         public void goReverse(){
             leftDrive.setPower(-DRIVE_SPEED);
             rightDrive.setPower(-DRIVE_SPEED);
         }
+
+        //makes intake go out for given amount of time
 
         public void deposit(){
 

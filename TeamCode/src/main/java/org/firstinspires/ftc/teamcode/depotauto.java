@@ -51,7 +51,7 @@ public class depotauto extends LinearOpMode {
         while (runtime.seconds() >= 7.4 && runtime.seconds() <= 8.9){
             moveFwd();
         }
-
+        /*
         while (runtime.seconds() >= 8.9 && runtime.seconds() <= 9.6){
             turnLeft();
         }
@@ -73,7 +73,7 @@ public class depotauto extends LinearOpMode {
           goReverse();
       }
 
-
+        */
         robotStop();
     }
 
