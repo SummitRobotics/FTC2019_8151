@@ -36,44 +36,46 @@ public class depotauto extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
-        while(runtime.seconds() <= 6.8){
+        while(runtime.seconds() <= 8.3){
             liftArm.setPower(1);
         }
         liftArm.setPower(0);
 
 
-        // Arm runs for 5.8 seconds
+        // Arm runs for 6.8 seconds
 
-        while (runtime.seconds() >= 6.8 && runtime.seconds() <= 7.4) {
+
+
+
+        while (runtime.seconds() >= 8.3 && runtime.seconds() <= 8.6) {
             turnRight();
         }
 
-        while (runtime.seconds() >= 7.4 && runtime.seconds() <= 8.9){
-            moveFwd();
+        while (runtime.seconds() >= 8.6 && runtime.seconds() <= 9.6){
+            goReverse();
         }
-        /*
-        while (runtime.seconds() >= 8.9 && runtime.seconds() <= 9.6){
+
+
+        while (runtime.seconds() >= 9.6 && runtime.seconds() <= 10.3){
             turnLeft();
         }
 
-        while (runtime.seconds() >= 9.6 && runtime.seconds() <= 11.1){
-            moveFwd();
+        while (runtime.seconds() >= 10.3 && runtime.seconds() <= 12.2){
+            goReverse();
         }
 
-        while (runtime.seconds() >= 11.1 && runtime.seconds() <= 14) {
-            intake.setPower(1);
+
+
+        while (runtime.seconds() >= 12.2& runtime.seconds() <= 16.3){
+            turnLeft();
         }
-        intake.setPower(0);
 
-      while (runtime.seconds() >= 14 && runtime.seconds() <= 15){
-          turnLeft();
-      }
+        while (runtime.seconds() >= 16.3 && runtime.seconds() <= 20.7){
+            goReverse();
+        }
 
-      while (runtime.seconds() >= 15 && runtime.seconds() <= 5){
-          goReverse();
-      }
 
-        */
+
         robotStop();
     }
 
