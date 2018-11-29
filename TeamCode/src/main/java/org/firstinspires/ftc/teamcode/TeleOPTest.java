@@ -120,7 +120,7 @@ public class TeleOPTest extends LinearOpMode {
             leftDrive.setPower(leftPower);
             rightDrive.setPower(rightPower);
             liftArm.setPower(liftPower);
-            intake.setPower(takerTilt/2);
+            intake.setPower(holdArm(takerTilt/2));
 
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Motors", "left" ,"right", "lift", leftPower, rightPower, liftPower);
@@ -160,6 +160,7 @@ public class TeleOPTest extends LinearOpMode {
     }*/
 
     public double isTakerPower(){
+
         if(gamepad1.dpad_up){
             return 1;
         }
@@ -168,6 +169,14 @@ public class TeleOPTest extends LinearOpMode {
         }
         else{
             return 0;
+        }
+    }
+    public double holdArm(double value){
+        if (value == 0){
+            return 0.15;
+        }
+        else{
+            return value;
         }
     }
 }
