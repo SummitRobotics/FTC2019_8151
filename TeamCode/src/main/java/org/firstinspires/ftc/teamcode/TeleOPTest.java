@@ -108,6 +108,7 @@ public class TeleOPTest extends LinearOpMode {
 
                 toggleSpeed = true;
                 powerThrottled = !powerThrottled;
+                
             } else if (!quarterSpeed) {
 
                 toggleSpeed = false;
