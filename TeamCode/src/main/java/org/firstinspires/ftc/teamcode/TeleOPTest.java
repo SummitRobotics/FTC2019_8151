@@ -19,8 +19,10 @@ public class TeleOPTest extends LinearOpMode {
 
     DigitalChannel digitalTouch;
     double power;
-    final double POWER_MULTIPLIER = 0.25;
+    final double QUARTER_POWER = 0.25;
+    double FULL_POWER = 1;
     ElapsedTime runtime = new ElapsedTime();
+    boolean powerThrottled = false;
     //This creates a new hardware map "Robot", which creates all our hardware objects (DcMotors, etc.)
     DcMotor rightDrive;
     DcMotor leftDrive;
@@ -30,7 +32,8 @@ public class TeleOPTest extends LinearOpMode {
     CRServo takerHead2;
 
     double n_one = 0;
-    double n_two = 0;
+
+    boolean toggleSpeed = false;
 
     //Example of how to use a Hardwaremap
     //This line runs the "Init" method in the "Robot" class, setting up all of our motors.
@@ -91,9 +94,8 @@ public class TeleOPTest extends LinearOpMode {
             double goBack = gamepad1.left_trigger;
 
             boolean intakeButton = gamepad1.dpad_up;
-            boolean quarterSpeed = gamepad1.right_stick_button;
+            boolean quarterSpeed = gamepad1.x;
             boolean outakeButton = gamepad1.dpad_down;
-
 
             leftPower = Range.clip((drive-goBack) + turn, -1.0, 1.0);
             rightPower = Range.clip((drive-goBack) - turn, -1.0, 1.0);
@@ -102,10 +104,16 @@ public class TeleOPTest extends LinearOpMode {
             takerHead1.setPower(takerPower);
             takerHead2.setPower(takerPower);
 
-            if (quarterSpeed){
-                leftPower *= POWER_MULTIPLIER;
-                rightPower *= POWER_MULTIPLIER;
+            if (quarterSpeed && !toggleSpeed) {
+
+                toggleSpeed = true;
+                powerThrottled = !powerThrottled;
+            } else if (!quarterSpeed) {
+
+                toggleSpeed = false;
             }
+
+
             // lift power negative when going up positive going down.
             // digital touch state is `true` when not pressed - `false` when pressed.
             if (!digitalTouch.getState() && liftPower > 0.0) {
@@ -115,12 +123,24 @@ public class TeleOPTest extends LinearOpMode {
             takerHead1.setPower(takerPower);
             takerHead2.setPower(takerPower);
 
+            double tiltPower = takerTilt;
+            if (tiltPower == 0) {
+                tiltPower = 0.15;
+            }
+
+            if (powerThrottled){
+                leftPower *= QUARTER_POWER;
+                rightPower *= QUARTER_POWER;
+                liftPower *= QUARTER_POWER;
+                tiltPower *= QUARTER_POWER;
+            }
 
             //Set power to the motors defined in the Robot class. actually, there is no robot class.
             leftDrive.setPower(leftPower);
             rightDrive.setPower(rightPower);
             liftArm.setPower(liftPower);
-            intake.setPower(holdArm(takerTilt/2));
+            intake.setPower(tiltPower);
+
 
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Motors", "left" ,"right", "lift", leftPower, rightPower, liftPower);

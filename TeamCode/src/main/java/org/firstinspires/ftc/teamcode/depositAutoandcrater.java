@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 @Autonomous(name="craterauto", group = "Linear Opmode")
-public class craterauto extends LinearOpMode {
+public class depositAutoandcrater extends LinearOpMode {
 
     ElapsedTime runtime = new ElapsedTime();
     protected DcMotor leftDrive;
