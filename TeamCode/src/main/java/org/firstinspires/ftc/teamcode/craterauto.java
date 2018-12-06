@@ -9,8 +9,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Created by SHS Robotics - Anne on 10/24/2018.
  */
 
-@Autonomous(name="CraterAutoblueSide", group = "Linear Opmode")
-public class CraterAutoBlueSide extends LinearOpMode {
+@Autonomous(name="craterauto", group = "Linear Opmode")
+public class craterauto extends LinearOpMode {
 
     ElapsedTime runtime = new ElapsedTime();
     protected DcMotor leftDrive;
