@@ -46,13 +46,21 @@ public class depotauto extends LinearOpMode {
         takerHead1.setDirection(DcMotor.Direction.REVERSE);
         takerHead2.setDirection(DcMotor.Direction.FORWARD);
 
-        //int position = arm_motor.getCurrentPosition();
-        //telemetry.addData("Encoder Position", position);
+        int liftposition = liftArm.getCurrentPosition();
+        int leftposition = leftDrive.getCurrentPosition();
+        int rightposition = rightDrive.getCurrentPosition();
+        int intakeposition = intake.getCurrentPosition();
+        telemetry.addData("Encoder Position", liftposition);
+        telemetry.addData("Encoder Position", intakeposition);
+        telemetry.addData("Encoder Position", leftposition);
+        telemetry.addData("Encoder Position", rightposition);
 
         waitForStart();
         runtime.reset();
-
-        //arm_motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        liftArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        intake.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //put instruction to stop recording encoder above this comment(put one for each motor)
 
         //color_sensor.red();   //Red channel value
@@ -69,7 +77,7 @@ public class depotauto extends LinearOpMode {
         color = colors.toColor();*/  //this normalizes the colors and sets the max amount (I don't know either, but this is very important.)
         //this sends the color input to the driver station
 
-        while(runtime.seconds() <= 7.8){
+        while(runtime.seconds() <= 5.8){
             liftArm.setPower(1);
         }
         liftArm.setPower(0);
