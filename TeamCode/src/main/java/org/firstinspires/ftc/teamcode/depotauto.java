@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.graphics.Color;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -62,13 +64,7 @@ public class depotauto extends LinearOpMode {
         liftArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         intake.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //put instruction to stop recording encoder above this comment(put one for each motor)
-
-        //color_sensor.red();   //Red channel value
-        //color_sensor.green();  //Green channel value
-        //color_sensor.blue();  // Blue channel value
-        //color_sensor.alpha(); // Total brightness
-        //color_sensor.argb();  // Combined color value/shading
-
+        //Color.colorToHSV(colors.toColor(), hsvValues);
         //NormalizedRGBA colors = color_Sensor.getNormalizedColors();
         /*float max = Math.max(Math.max(Math.max(colors.red, colors.green), colors.blue), colors.alpha);
         colors.red   /= max;
@@ -76,8 +72,9 @@ public class depotauto extends LinearOpMode {
         colors.blue  /= max;
         color = colors.toColor();*/  //this normalizes the colors and sets the max amount (I don't know either, but this is very important.)
         //this sends the color input to the driver station
+        //Color.RGBToHSV(Color.red(color), Color.green(color), Color.blue(color), hsvValues);
 
-        while(runtime.seconds() <= 5.8){
+        while(runtime.seconds() <= 8.8){
             liftArm.setPower(1);
         }
         liftArm.setPower(0);
@@ -85,37 +82,37 @@ public class depotauto extends LinearOpMode {
         //code for adding encoder data goes inside the brackets in the "while" loop.
         // Arm runs for 7.8 seconds
 
-        while (runtime.seconds() >= 7.8 && runtime.seconds() <= 8.1) {
+        while (runtime.seconds() >= 8.8 && runtime.seconds() <= 9.1) {
             turnRight();
         }
 
-        while (runtime.seconds() >= 8.1 && runtime.seconds() <= 9.1){
+        while (runtime.seconds() >= 9.1 && runtime.seconds() <= 10.1){
             goReverse();
         }
 
 
-        while (runtime.seconds() >= 9.1 && runtime.seconds() <= 9.8){
+        while (runtime.seconds() >= 10.1 && runtime.seconds() <= 10.8){
             turnLeft();
         }
 
-        while (runtime.seconds() >= 9.8 && runtime.seconds() <= 11.5){
+        while (runtime.seconds() >= 10.8 && runtime.seconds() <= 12.5){
             goReverse();
         }
 
-        while (runtime.seconds() >= 11.5 && runtime.seconds() <= 14){
+        while (runtime.seconds() >= 12.5 && runtime.seconds() <= 16){
             leftDrive.setPower(0);
             rightDrive.setPower(0);
             outPut();
         }
 
-        while (runtime.seconds() >= 14 && runtime.seconds() <= 16.5){
+        while (runtime.seconds() >= 16 && runtime.seconds() <= 18.5){
             takerHead1.setPower(0);
             takerHead2.setPower(0);
 
             turnLeft();
         }
 
-        while (runtime.seconds() >= 16.5 && runtime.seconds() <= 22){
+        while (runtime.seconds() >= 18.5 && runtime.seconds() <= 26){
             goReverse();
         }
 
