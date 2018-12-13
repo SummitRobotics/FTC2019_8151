@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -10,7 +11,8 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  */
 
 @Autonomous(name="CraterAutoblueSide", group = "Linear Opmode")
-public class CraterAutoBlueSide extends LinearOpMode {
+@Disabled
+public class craterauto extends LinearOpMode {
 
     ElapsedTime runtime = new ElapsedTime();
     protected DcMotor leftDrive;
