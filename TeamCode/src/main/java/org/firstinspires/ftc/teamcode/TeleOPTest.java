@@ -29,6 +29,8 @@ public class TeleOPTest extends LinearOpMode {
     //This line runs the "Init" method in the "Robot" class, setting up all of our motors.
     public void runOpMode() {
 
+        robot.init(hardwareMap);
+
         digitalTouch =hardwareMap.get(DigitalChannel.class, "sensor_digital");
 
         /* "Taker Heads" bot and top Servo */
@@ -45,10 +47,10 @@ public class TeleOPTest extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            double leftPower;
-            double rightPower;
-            double liftPower;
-            double intakePower;
+            double leftPower = 0;
+            double rightPower = 0;
+            double liftPower = 0;
+            //double intakePower;
 
 
             double drive = gamepad1.right_trigger;
@@ -61,19 +63,19 @@ public class TeleOPTest extends LinearOpMode {
             double lift = gamepad1.left_stick_y;
             double goBack = gamepad1.left_trigger;
 
-            boolean intakeButton = gamepad1.dpad_up;
+            //boolean intakeButton = gamepad1.dpad_up;
             boolean quarterSpeed = gamepad1.x;
-            boolean outakeButton = gamepad1.dpad_down;
+            //boolean outakeButton = gamepad1.dpad_down;
 
             leftPower = Range.clip((drive-goBack) + turn, -1.0, 1.0);
             rightPower = Range.clip((drive-goBack) - turn, -1.0, 1.0);
-            liftPower = Range.clip(lift, -1.0, 1.0);
+            liftPower = Range.clip(-lift, -1.0, 1.0);
 
             if (quarterSpeed && !toggleSpeed) {
 
                 toggleSpeed = true;
                 powerThrottled = !powerThrottled;
-                
+
             } else if (!quarterSpeed) {
 
                 toggleSpeed = false;

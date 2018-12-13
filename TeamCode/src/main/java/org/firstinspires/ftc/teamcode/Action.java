@@ -58,4 +58,10 @@ public class Action {
         robot.leftDrive.setPower(0);
         robot.rightDrive.setPower(0);
     }
+    public void dropMarker(double time){
+        double initTime = robot.runtime.seconds();
+        while(robot.runtime.seconds() - initTime <= time) {
+            robot.marker.setPosition(-1);
+        }
+    }
 }

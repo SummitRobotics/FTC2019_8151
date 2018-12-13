@@ -37,5 +37,7 @@ public class hardwareMap {
         leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        marker.setPosition(0);
+
     }
 }
