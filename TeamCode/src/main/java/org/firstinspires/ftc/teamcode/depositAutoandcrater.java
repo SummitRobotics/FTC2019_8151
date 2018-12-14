@@ -11,8 +11,12 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  * Created by SHS Robotics - Anne on 10/24/2018.
  */
 
+<<<<<<< HEAD
+@Autonomous(name="depositAutoandcrater", group = "Linear Opmode")
+=======
 @Autonomous(name="notcraterauto", group = "Linear Opmode")
 @Disabled
+>>>>>>> dev_test
 public class depositAutoandcrater extends LinearOpMode {
 
     ElapsedTime runtime = new ElapsedTime();

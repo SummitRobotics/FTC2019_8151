@@ -19,7 +19,14 @@ public class TeleOPTest extends LinearOpMode {
     double FULL_POWER = 1;
     boolean powerThrottled = false;
     //This creates a new hardware map "Robot", which creates all our hardware objects (DcMotors, etc.)
+<<<<<<< HEAD
+    DcMotor rightDrive;
+    DcMotor leftDrive;
+    DcMotor liftArm;
+    DcMotor intake;
+=======
     hardwareMap robot = new hardwareMap();
+>>>>>>> dev_test
 
     double n_one = 0;
 
@@ -33,11 +40,16 @@ public class TeleOPTest extends LinearOpMode {
 
         digitalTouch =hardwareMap.get(DigitalChannel.class, "sensor_digital");
 
+<<<<<<< HEAD
+        rightDrive.setDirection(DcMotor.Direction.REVERSE);
+        leftDrive.setDirection(DcMotor.Direction.REVERSE);
+=======
         /* "Taker Heads" bot and top Servo */
 
         /* These need to be flipped possible */
 
 
+>>>>>>> dev_test
         digitalTouch.setMode(DigitalChannel.Mode.INPUT);
 
         //robot.liftArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -69,7 +81,11 @@ public class TeleOPTest extends LinearOpMode {
 
             leftPower = Range.clip((drive-goBack) + turn, -1.0, 1.0);
             rightPower = Range.clip((drive-goBack) - turn, -1.0, 1.0);
+<<<<<<< HEAD
+            liftPower = Range.clip(lift, -1.0, 1.0);
+=======
             liftPower = Range.clip(-lift, -1.0, 1.0);
+>>>>>>> dev_test
 
             if (quarterSpeed && !toggleSpeed) {
 
@@ -88,10 +104,18 @@ public class TeleOPTest extends LinearOpMode {
                 liftPower = 0;
             }
 
+<<<<<<< HEAD
+
+            double tiltPower = takerTilt;
+            if (tiltPower == 0) {
+                tiltPower = 0.15;
+            }
+=======
             //double tiltPower = takerTilt;
             //if (tiltPower == 0) {
             //    tiltPower = 0.15;
             //}
+>>>>>>> dev_test
 
             if (powerThrottled){
                 leftPower *= QUARTER_POWER;
