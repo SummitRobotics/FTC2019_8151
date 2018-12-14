@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.util.Range;
 public class dillonTeleop extends LinearOpMode {
     hardwareMap robot = new hardwareMap();
     DigitalChannel digitalTouch;
+
     @Override
     public void runOpMode() {
         robot.init(hardwareMap);
