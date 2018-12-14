@@ -2,13 +2,9 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.hardware.CRServo;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
-import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
-import com.qualcomm.robotcore.hardware.DcMotor;
 
 /**
  * Created by SHS Robotics - Anne on 10/10/2018.
@@ -21,13 +17,16 @@ public class TeleOPTest extends LinearOpMode {
     double power;
     final double QUARTER_POWER = 0.25;
     double FULL_POWER = 1;
-    ElapsedTime runtime = new ElapsedTime();
     boolean powerThrottled = false;
     //This creates a new hardware map "Robot", which creates all our hardware objects (DcMotors, etc.)
+<<<<<<< HEAD
     DcMotor rightDrive;
     DcMotor leftDrive;
     DcMotor liftArm;
     DcMotor intake;
+=======
+    hardwareMap robot = new hardwareMap();
+>>>>>>> dev_test
 
     double n_one = 0;
 
@@ -37,58 +36,56 @@ public class TeleOPTest extends LinearOpMode {
     //This line runs the "Init" method in the "Robot" class, setting up all of our motors.
     public void runOpMode() {
 
-        digitalTouch =hardwareMap.get(DigitalChannel.class, "sensor_digital");
-        rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
-        leftDrive = hardwareMap.get(DcMotor.class, "left_drive");
-        intake = hardwareMap.get(DcMotor.class, "uptake");
+        robot.init(hardwareMap);
 
+        digitalTouch =hardwareMap.get(DigitalChannel.class, "sensor_digital");
+
+<<<<<<< HEAD
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
         leftDrive.setDirection(DcMotor.Direction.REVERSE);
+=======
+        /* "Taker Heads" bot and top Servo */
+
+        /* These need to be flipped possible */
+
+
+>>>>>>> dev_test
         digitalTouch.setMode(DigitalChannel.Mode.INPUT);
 
-        liftArm = hardwareMap.get(DcMotor.class, "lift");
-
-        liftArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-        rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-        leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-        intake.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-        liftArm.setDirection(DcMotor.Direction.FORWARD);
-        intake = hardwareMap.get(DcMotor.class, "uptake");
-
-        intake.setDirection(DcMotor.Direction.FORWARD);
+        //robot.liftArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         waitForStart();
-        runtime.reset();
+        robot.runtime.reset();
 
         while (opModeIsActive()) {
 
-            double leftPower;
-            double rightPower;
-            double liftPower;
-            double intakePower;
+            double leftPower = 0;
+            double rightPower = 0;
+            double liftPower = 0;
+            //double intakePower;
 
 
             double drive = gamepad1.right_trigger;
             // Controller Right Joystick
             double turn = gamepad1.right_stick_x;
-            double takerPower = isTakerPower();
-            double takerTilt = gamepad1.right_stick_y;
+            //double takerPower = isTakerPower();
+            //double takerTilt = gamepad1.right_stick_y;
 
             // Controller Left Joystick
             double lift = gamepad1.left_stick_y;
             double goBack = gamepad1.left_trigger;
 
-            boolean intakeButton = gamepad1.dpad_up;
+            //boolean intakeButton = gamepad1.dpad_up;
             boolean quarterSpeed = gamepad1.x;
-            boolean outakeButton = gamepad1.dpad_down;
+            //boolean outakeButton = gamepad1.dpad_down;
 
             leftPower = Range.clip((drive-goBack) + turn, -1.0, 1.0);
             rightPower = Range.clip((drive-goBack) - turn, -1.0, 1.0);
+<<<<<<< HEAD
             liftPower = Range.clip(lift, -1.0, 1.0);
+=======
+            liftPower = Range.clip(-lift, -1.0, 1.0);
+>>>>>>> dev_test
 
             if (quarterSpeed && !toggleSpeed) {
 
@@ -107,30 +104,37 @@ public class TeleOPTest extends LinearOpMode {
                 liftPower = 0;
             }
 
+<<<<<<< HEAD
 
             double tiltPower = takerTilt;
             if (tiltPower == 0) {
                 tiltPower = 0.15;
             }
+=======
+            //double tiltPower = takerTilt;
+            //if (tiltPower == 0) {
+            //    tiltPower = 0.15;
+            //}
+>>>>>>> dev_test
 
             if (powerThrottled){
                 leftPower *= QUARTER_POWER;
                 rightPower *= QUARTER_POWER;
                 liftPower *= QUARTER_POWER;
-                tiltPower *= QUARTER_POWER;
+                //tiltPower *= QUARTER_POWER;
             }
 
             //Set power to the motors defined in the Robot class. actually, there is no robot class.
-            leftDrive.setPower(leftPower);
-            rightDrive.setPower(rightPower);
-            liftArm.setPower(liftPower);
-            intake.setPower(tiltPower);
+            robot.leftDrive.setPower(leftPower);
+            robot.rightDrive.setPower(rightPower);
+            robot.liftArm.setPower(liftPower);
 
 
-            telemetry.addData("Status", "Run Time: " + runtime.toString());
+
+            telemetry.addData("Status", "Run Time: " + robot.runtime.toString());
             telemetry.addData("Motors", "left" ,"right", "lift", leftPower, rightPower, liftPower);
             telemetry.addData( "Button", "Button: " + digitalTouch.getState());
-            telemetry.addData( "Intake Power", takerPower);
+            //telemetry.addData( "Intake Power", takerPower);
             telemetry.update();
 
         }
