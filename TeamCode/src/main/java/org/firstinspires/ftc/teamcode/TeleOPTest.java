@@ -28,8 +28,6 @@ public class TeleOPTest extends LinearOpMode {
     DcMotor leftDrive;
     DcMotor liftArm;
     DcMotor intake;
-    CRServo takerHead1;
-    CRServo takerHead2;
 
     double n_one = 0;
 
@@ -43,15 +41,6 @@ public class TeleOPTest extends LinearOpMode {
         rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
         leftDrive = hardwareMap.get(DcMotor.class, "left_drive");
         intake = hardwareMap.get(DcMotor.class, "uptake");
-
-        /* "Taker Heads" bot and top Servo */
-        takerHead1 = hardwareMap.get(CRServo.class, "takerHead1");
-        takerHead2 = hardwareMap.get(CRServo.class, "takerHead2");
-
-        /* These need to be flipped possible */
-        takerHead1.setDirection(DcMotor.Direction.REVERSE);
-        takerHead2.setDirection(DcMotor.Direction.FORWARD);
-
 
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
         leftDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -101,9 +90,6 @@ public class TeleOPTest extends LinearOpMode {
             rightPower = Range.clip((drive-goBack) - turn, -1.0, 1.0);
             liftPower = Range.clip(lift, -1.0, 1.0);
 
-            takerHead1.setPower(takerPower);
-            takerHead2.setPower(takerPower);
-
             if (quarterSpeed && !toggleSpeed) {
 
                 toggleSpeed = true;
@@ -121,8 +107,6 @@ public class TeleOPTest extends LinearOpMode {
                 liftPower = 0;
             }
 
-            takerHead1.setPower(takerPower);
-            takerHead2.setPower(takerPower);
 
             double tiltPower = takerTilt;
             if (tiltPower == 0) {

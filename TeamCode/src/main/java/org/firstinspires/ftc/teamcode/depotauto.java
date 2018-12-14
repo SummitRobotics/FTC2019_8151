@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.NormalizedRGBA;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /**
@@ -24,8 +25,7 @@ public class depotauto extends LinearOpMode {
     protected DcMotor rightDrive;
     protected DcMotor liftArm;
     protected DcMotor intake;
-    protected CRServo takerHead1;
-    protected CRServo takerHead2;
+    protected Servo markerDrop;
 
     private final double DRIVE_SPEED = 0.5;
     private final double TURN_SPEED = 0.5;
@@ -35,18 +35,18 @@ public class depotauto extends LinearOpMode {
         rightDrive = hardwareMap.get(DcMotor.class, "right_drive");
         leftDrive = hardwareMap.get(DcMotor.class, "left_drive");
         liftArm = hardwareMap.get(DcMotor.class, "lift");
-        intake = hardwareMap.get(DcMotor.class, "uptake");
-        takerHead1 = hardwareMap.get(CRServo.class, "takerHead1");
-        takerHead2 = hardwareMap.get(CRServo.class, "takerHead2");
+
+        markerDrop = hardwareMap.get(Servo.class, "outPut");
         //color_sensor = hardwareMap.colorSensor.get("rainbow_reader");
 
 
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
         leftDrive.setDirection(DcMotor.Direction.REVERSE);
         liftArm.setDirection(DcMotor.Direction.REVERSE);
-        intake.setDirection(DcMotor.Direction.REVERSE);
-        takerHead1.setDirection(DcMotor.Direction.REVERSE);
-        takerHead2.setDirection(DcMotor.Direction.FORWARD);
+
+        markerDrop.setDirection(Servo.Direction.REVERSE);
+
+        markerDrop.setPosition(1);
 
         int liftposition = liftArm.getCurrentPosition();
         int leftposition = leftDrive.getCurrentPosition();
@@ -59,10 +59,11 @@ public class depotauto extends LinearOpMode {
 
         waitForStart();
         runtime.reset();
-        rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        liftArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        intake.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        //rightDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //leftDrive.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //liftArm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //intake.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //put instruction to stop recording encoder above this comment(put one for each motor)
         //Color.colorToHSV(colors.toColor(), hsvValues);
         //NormalizedRGBA colors = color_Sensor.getNormalizedColors();
@@ -102,14 +103,14 @@ public class depotauto extends LinearOpMode {
         while (runtime.seconds() >= 12.5 && runtime.seconds() <= 16){
             leftDrive.setPower(0);
             rightDrive.setPower(0);
-            outPut();
+            outPut(0);
         }
 
-        while (runtime.seconds() >= 16 && runtime.seconds() <= 18.5){
-            takerHead1.setPower(0);
-            takerHead2.setPower(0);
 
+
+        while (runtime.seconds() >= 16 && runtime.seconds() <= 18.5){
             turnLeft();
+            outPut(1);
         }
 
         while (runtime.seconds() >= 18.5 && runtime.seconds() <= 26){
@@ -147,9 +148,9 @@ public class depotauto extends LinearOpMode {
         leftDrive.setPower(-DRIVE_SPEED);
         rightDrive.setPower(-DRIVE_SPEED);
     }
-    public void outPut() {
-        takerHead1.setPower(-OUTPUT_SPEED);
-        takerHead2.setPower(-OUTPUT_SPEED);
+
+    public void outPut(double amount) {
+        markerDrop.setPosition(amount);
     }
 }
 
