@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.util.Range;
 
@@ -20,12 +21,12 @@ public class TeleOPTest extends LinearOpMode {
     boolean powerThrottled = false;
     //This creates a new hardware map "Robot", which creates all our hardware objects (DcMotors, etc.)
 <<<<<<< HEAD
-    DcMotor rightDrive;
+            DcMotor rightDrive;
     DcMotor leftDrive;
     DcMotor liftArm;
     DcMotor intake;
 =======
-    hardwareMap robot = new hardwareMap();
+   hardwareMap robot = new hardwareMap();
 >>>>>>> dev_test
 
     double n_one = 0;

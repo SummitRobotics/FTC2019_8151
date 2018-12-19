@@ -7,6 +7,10 @@ public class Action {
     private final double TURN_SPEED = 0.5;
     private final double OUTPUT_SPEED = 1;
 
+    public Action(){
+
+    }
+
     protected void detach(double time){
         double initTime = robot.runtime.seconds();
         while (robot.runtime.seconds() - initTime <= time){

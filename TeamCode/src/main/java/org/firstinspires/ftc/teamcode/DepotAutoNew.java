@@ -6,6 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 @Autonomous(name="DepotAutoNew - Crater Alignment",group = "LinearOpMode")
 public class DepotAutoNew extends LinearOpMode {
     Action action = new Action();
+    //className objectName = new className()
+    //className() is a constructor
     @Override
     public void runOpMode() {
         action.robot.init(hardwareMap);
@@ -27,4 +29,5 @@ public class DepotAutoNew extends LinearOpMode {
         }
 
     }
+
 }
