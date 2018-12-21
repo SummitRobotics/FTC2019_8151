@@ -18,9 +18,14 @@ public class dillonTeleop extends LinearOpMode {
         while(opModeIsActive()){
             double leftPower, rightPower, liftPower;
 
+
             leftPower = Range.clip(gamepad1.left_stick_y - gamepad1.left_stick_x, -1, 1);
             rightPower = Range.clip(gamepad1.left_stick_y - gamepad1.left_stick_x, -1, 1);
             liftPower = Range.clip(gamepad1.right_trigger - gamepad1.left_trigger, -1, 1);
+
+            if (!digitalTouch.getState() && liftPower > 0.0) {
+                liftPower = 0;
+            }
 
             robot.leftDrive.setPower(leftPower);
             robot.rightDrive.setPower(rightPower);
