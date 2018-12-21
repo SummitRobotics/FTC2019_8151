@@ -11,10 +11,10 @@ import com.qualcomm.robotcore.util.Range;
  * Created by SHS Robotics - Anne on 10/10/2018.
  */
 
-@TeleOp(name="TeleOPTest", group="Linear Opmode")
-public class TeleOPTest extends LinearOpMode {
+/*@TeleOp(name="teleopnobueno", group="Linear Opmode")
+//public class teleopnobueno extends LinearOpMode {
 
-    DigitalChannel digitalTouch;
+  /*  DigitalChannel digitalTouch;
     double power;
     final double QUARTER_POWER = 0.25;
     double FULL_POWER = 1;
@@ -48,7 +48,7 @@ public class TeleOPTest extends LinearOpMode {
 
         /* These need to be flipped possible */
 
-        digitalTouch.setMode(DigitalChannel.Mode.INPUT);
+       /* digitalTouch.setMode(DigitalChannel.Mode.INPUT);
 
         //robot.liftArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -163,7 +163,7 @@ public class TeleOPTest extends LinearOpMode {
         }
     }*/
 
-    public double isTakerPower(){
+   /* public double isTakerPower(){
 
         if(gamepad1.dpad_up){
             return 1;
