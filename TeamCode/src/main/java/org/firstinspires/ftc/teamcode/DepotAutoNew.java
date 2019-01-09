@@ -15,16 +15,15 @@ public class DepotAutoNew extends LinearOpMode {
         action.robot.runtime.reset();
 
         while(opModeIsActive()){
-            action.detach(9.0);
-            action.turnRight(0.3);
+            action.detach(8.0);
+            action.turnRight(0.4);
             action.goReverse(1.0);
-            action.turnLeft(0.3);
+            action.turnLeft(0.4);
             //spin
-            action.turnLeft(2.8);
-            action.moveFwd(5.5);
+            action.goReverse(1.7);
             action.dropMarker(2.5);
-            action.turnRight(0.6);
-            action.goReverse(7.0);
+            action.turnRight(5.5);
+            action.goReverse(3.0);
 
         }
 

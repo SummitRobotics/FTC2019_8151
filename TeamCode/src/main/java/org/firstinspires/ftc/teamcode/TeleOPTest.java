@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.util.Range;
 
@@ -11,22 +10,16 @@ import com.qualcomm.robotcore.util.Range;
  * Created by SHS Robotics - Anne on 10/10/2018.
  */
 
-/*@TeleOp(name="teleopnobueno", group="Linear Opmode")
-//public class teleopnobueno extends LinearOpMode {
+@TeleOp(name="TeleOPTest", group="Linear Opmode")
+public class TeleOPTest extends LinearOpMode {
 
-  /*  DigitalChannel digitalTouch;
+    DigitalChannel digitalTouch;
     double power;
     final double QUARTER_POWER = 0.25;
     double FULL_POWER = 1;
     boolean powerThrottled = false;
     //This creates a new hardware map "Robot", which creates all our hardware objects (DcMotors, etc.)
-
-            DcMotor rightDrive;
-    DcMotor leftDrive;
-    DcMotor liftArm;
-    DcMotor intake;
-
-   hardwareMap robot = new hardwareMap();
+    hardwareMap robot = new hardwareMap();
 
     double n_one = 0;
 
@@ -35,20 +28,17 @@ import com.qualcomm.robotcore.util.Range;
     //Example of how to use a Hardwaremap
     //This line runs the "Init" method in the "Robot" class, setting up all of our motors.
     public void runOpMode() {
-
+        
         robot.init(hardwareMap);
 
         digitalTouch =hardwareMap.get(DigitalChannel.class, "sensor_digital");
-
-
-        rightDrive.setDirection(DcMotor.Direction.REVERSE);
-        leftDrive.setDirection(DcMotor.Direction.REVERSE);
 
         /* "Taker Heads" bot and top Servo */
 
         /* These need to be flipped possible */
 
-       /* digitalTouch.setMode(DigitalChannel.Mode.INPUT);
+
+        digitalTouch.setMode(DigitalChannel.Mode.INPUT);
 
         //robot.liftArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
@@ -57,9 +47,9 @@ import com.qualcomm.robotcore.util.Range;
 
         while (opModeIsActive()) {
 
-            double leftPower = 0;
-            double rightPower = 0;
-            double liftPower = 0;
+            double leftPower;
+            double rightPower;
+            double liftPower;
             //double intakePower;
 
 
@@ -79,15 +69,13 @@ import com.qualcomm.robotcore.util.Range;
 
             leftPower = Range.clip((drive-goBack) + turn, -1.0, 1.0);
             rightPower = Range.clip((drive-goBack) - turn, -1.0, 1.0);
-
-            liftPower = Range.clip(lift, -1.0, 1.0);
-
+            liftPower = Range.clip(-lift, -1.0, 1.0);
 
             if (quarterSpeed && !toggleSpeed) {
 
                 toggleSpeed = true;
                 powerThrottled = !powerThrottled;
-
+                
             } else if (!quarterSpeed) {
 
                 toggleSpeed = false;
@@ -100,17 +88,10 @@ import com.qualcomm.robotcore.util.Range;
                 liftPower = 0;
             }
 
-
-            double tiltPower = takerTilt;
-            if (tiltPower == 0) {
-                tiltPower = 0.15;
-            }
-
             //double tiltPower = takerTilt;
             //if (tiltPower == 0) {
             //    tiltPower = 0.15;
             //}
-
 
             if (powerThrottled){
                 leftPower *= QUARTER_POWER;
@@ -163,7 +144,7 @@ import com.qualcomm.robotcore.util.Range;
         }
     }*/
 
-   /* public double isTakerPower(){
+    public double isTakerPower(){
 
         if(gamepad1.dpad_up){
             return 1;

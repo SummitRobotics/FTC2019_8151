@@ -7,19 +7,18 @@ public class Action {
     private final double TURN_SPEED = 0.5;
     private final double OUTPUT_SPEED = 1;
 
-    public Action(){
-
-    }
-
     protected void detach(double time){
+        boolean isDone;
         double initTime = robot.runtime.seconds();
         while (robot.runtime.seconds() - initTime <= time){
             robot.liftArm.setPower(1);
         }
         robot.liftArm.setPower(0);
+        isDone = true;
     }
 
     public void moveFwd(double time) {
+        boolean isDone;
         double initTime = robot.runtime.seconds();
         while(robot.runtime.seconds() - initTime <= time) {
             robot.leftDrive.setPower(DRIVE_SPEED);
@@ -27,6 +26,7 @@ public class Action {
         }
         robot.leftDrive.setPower(0);
         robot.rightDrive.setPower(0);
+        isDone = true;
     }
 
     public void robotStop() {
@@ -36,14 +36,17 @@ public class Action {
     }
 
     public void turnLeft(double time ) {
+        boolean isDone;
         double initTime = robot.runtime.seconds();
         while(robot.runtime.seconds() - initTime <= time) {
             robot.leftDrive.setPower(-TURN_SPEED);
             robot.rightDrive.setPower(TURN_SPEED);
         }
+        isDone = true;
     }
 
     public void turnRight(double time) {
+        boolean isDone;
         double initTime = robot.runtime.seconds();
         while(robot.runtime.seconds() - initTime <= time) {
             robot.leftDrive.setPower(TURN_SPEED);
@@ -51,9 +54,12 @@ public class Action {
         }
         robot.leftDrive.setPower(0);
         robot.rightDrive.setPower(0);
+        isDone = true;
     }
 
+
     public void goReverse(double time) {
+        boolean isDone;
         double initTime = robot.runtime.seconds();
         while(robot.runtime.seconds() - initTime <= time) {
             robot.leftDrive.setPower(-DRIVE_SPEED);
@@ -61,11 +67,12 @@ public class Action {
         }
         robot.leftDrive.setPower(0);
         robot.rightDrive.setPower(0);
+        isDone = true;
     }
-    public void dropMarker(double time){
+        public void dropMarker(double time){
         double initTime = robot.runtime.seconds();
         while(robot.runtime.seconds() - initTime <= time) {
-            robot.marker.setPosition(-1);
+            robot.marker.setPosition(1);
         }
     }
 }
