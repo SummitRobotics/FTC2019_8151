@@ -84,7 +84,7 @@ public class TeleOPTest extends LinearOpMode {
 
             // lift power negative when going up positive going down.
             // digital touch state is `true` when not pressed - `false` when pressed.
-            if (!digitalTouch.getState() && liftPower > 0.0) {
+            if (!digitalTouch.getState() && liftPower < 0.0) {
                 liftPower = 0;
             }
 

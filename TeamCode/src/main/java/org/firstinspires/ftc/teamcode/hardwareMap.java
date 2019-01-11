@@ -39,6 +39,8 @@ public class hardwareMap {
         leftDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightDrive.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        //set the leftdrive.runMode to (DcMotor.Runmode.RUN_USING_ENCODER);
+
         marker.setPosition(0);
 
     }
