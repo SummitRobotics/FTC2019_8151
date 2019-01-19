@@ -9,7 +9,7 @@ public class MoveByEncoder extends CoreAction {
 
     private double leftSpeed, rightSpeed;
     private int leftTicks, rightTicks;
-    private int nextPos, leftTarget, rightTarget;
+    private int leftTarget, rightTarget;
 
     public MoveByEncoder(double distance, double speed, int nextPos) {
 

@@ -1,8 +1,13 @@
 package org.firstinspires.ftc.teamcode.main;
 
+import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 public class Hardware {
     // Declare Hardware members.
@@ -10,6 +15,13 @@ public class Hardware {
     public DcMotor rightDrive;
     public DcMotor liftMotor;
     public DcMotor sampleMotor;
+    public CRServo leftLiftServo;
+    public CRServo rightLiftServo;
+    public CRServo frontIntakeServo;
+    public CRServo backIntakeServo;
+
+    public TouchSensor liftButton;
+    public ColorSensor colorSensor;
 
     // Prepare variables for encoder use
     // http://www.revrobotics.com/content/docs/Encoder-Guide.pdf
@@ -23,7 +35,7 @@ public class Hardware {
 
     public final int DRIVE_COUNTS_PER_RADIAN = (int) -(ROBOT_WIDTH / 2 * DRIVE_COUNTS_PER_INCH);
 
-    private final double LIFT_GEAR_RATIO = 1/1; // WheelGear / MotorGear
+    private final double LIFT_GEAR_RATIO = 120/25; // WheelGear / MotorGear
     public final double LIFT_COUNTS_PER_ROT = (MOTOR_REV_COUNTS * LIFT_GEAR_RATIO);
 
     // Local opmode hardware map
@@ -41,9 +53,17 @@ public class Hardware {
         rightDrive = this.hardwareMap.get(DcMotor.class, "rightDrive");
         liftMotor = this.hardwareMap.get(DcMotor.class, "liftMotor");
         sampleMotor = this.hardwareMap.get(DcMotor.class, "sampleMotor");
+        leftLiftServo = this.hardwareMap.get(CRServo.class, "leftLiftServo");
+        rightLiftServo = this.hardwareMap.get(CRServo.class, "rightLiftServo");
+        frontIntakeServo = this.hardwareMap.get(CRServo.class, "frontIntakeServo");
+        backIntakeServo = this.hardwareMap.get(CRServo.class, "backIntakeServo");
+
+        liftButton = hardwareMap.get(TouchSensor.class, "liftButton");
+        colorSensor = hardwareMap.get(ColorSensor.class, "colorSensor");
 
         // Reverse the motor that runs backwards, set servo positions.
-        leftDrive.setDirection(DcMotor.Direction.REVERSE);
+        leftDrive.setDirection(DcMotor.Direction.FORWARD);
         rightDrive.setDirection(DcMotor.Direction.FORWARD);
+        liftMotor.setDirection(DcMotor.Direction.REVERSE);
     }
 }

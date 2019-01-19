@@ -9,7 +9,7 @@ public class TurnByEncoder extends CoreAction {
 
     private double leftSpeed, rightSpeed;
     private int leftTicks, rightTicks;
-    private int nextPos, leftTarget, rightTarget;
+    private int leftTarget, rightTarget;
 
     // Direction variables
 

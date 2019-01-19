@@ -7,7 +7,6 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class WaitForTime extends CoreAction {
 
     long time;
-    int nextPos;
     ElapsedTime runtime = new ElapsedTime();
 
     public WaitForTime(double time, int nextPos) {

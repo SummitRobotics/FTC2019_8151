@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -43,9 +45,35 @@ public class POVTeleOp extends OpMode{
         double turn = gamepad1.right_stick_x;
 
         // Set power variables
-        leftPower = Range.clip(drive + turn, -1.0, 1.0);
-        rightPower = Range.clip(drive - turn, -1.0, 1.0);
-        liftPower = Range.clip(gamepad1.left_stick_y, -1, 1);
+        leftPower = Range.clip((drive + turn), -1.0, 1.0);
+        rightPower = Range.clip((drive - turn), -1.0, 1.0);
+        liftPower = Range.clip(-gamepad1.left_stick_y, -1, 1);
+
+        if (gamepad1.right_bumper) {
+            robot.frontIntakeServo.setPower(0.9);
+            robot.backIntakeServo.setPower(0.9);
+
+        } else if (gamepad1.left_bumper) {
+            robot.frontIntakeServo.setPower(-0.9);
+            robot.backIntakeServo.setPower(-0.9);
+
+        } else {
+            robot.frontIntakeServo.setPower(0);
+            robot.backIntakeServo.setPower(0);
+        }
+
+        if (gamepad1.dpad_up) {
+            robot.leftLiftServo.setPower(-0.4);
+            robot.rightLiftServo.setPower(0.4);
+
+        } else if (gamepad1.dpad_down) {
+            robot.leftLiftServo.setPower(0.3);
+            robot.rightLiftServo.setPower(-0.3);
+
+        } else {
+            robot.leftLiftServo.setPower(0.02);
+            robot.rightLiftServo.setPower(0.02);
+        }
 
 
         // Send calculated power to hardware
@@ -55,14 +83,15 @@ public class POVTeleOp extends OpMode{
 
         // Show the elapsed game time and wheel power.
         telemetry.addData("Status", "Run Time: " + runtime.toString());
-        telemetry.addData("Motors", "Drive: (%.2f), Turn: (%.2f)", drive, turn);
+        telemetry.addData("Motors", "Left: (%.2f), Right: (%.2f)", leftPower, rightPower);
+        telemetry.addData("Lift", robot.liftMotor.getCurrentPosition() / robot.LIFT_COUNTS_PER_ROT);
+
     }
 
     @Override
     public void stop() { telemetry.addData("Status", "Stopped"); }
 
     private double logPower(double power) {
-
         if (power >= 0) {
             return 0.96 * Math.log10(power + 0.1) + 0.96;
         } else {
@@ -71,6 +100,9 @@ public class POVTeleOp extends OpMode{
     }
 
     private double expPower(double power) {
+        if (power == 0) {
+            return 0;
+        }
         return (power * power) * (Math.abs(power) / power);
     }
 
