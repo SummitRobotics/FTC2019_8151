@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -19,6 +20,8 @@ public class POVTeleOp extends OpMode{
     public void init() {
         // Initialize all hardware
         robot.init(hardwareMap);
+        robot.leftDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.rightDrive.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
@@ -49,6 +52,14 @@ public class POVTeleOp extends OpMode{
         rightPower = Range.clip((drive - turn), -1.0, 1.0);
         liftPower = Range.clip(-gamepad1.left_stick_y, -1, 1);
 
+
+
+
+        while((runtime.seconds() < 3) && (runtime.seconds() > 0)){
+            robot.leftDrive.setPower(1);
+            robot.rightDrive.setPower(1);
+        }
+
         if (gamepad1.right_bumper) {
             robot.frontIntakeServo.setPower(0.9);
             robot.backIntakeServo.setPower(0.9);
@@ -78,13 +89,16 @@ public class POVTeleOp extends OpMode{
 
         // Send calculated power to hardware
         robot.leftDrive.setPower(leftPower);
-        robot.rightDrive.setPower(rightPower);
+        robot.rightDrive.setPower(leftPower);
         robot.liftMotor.setPower(liftPower);
 
         // Show the elapsed game time and wheel power.
         telemetry.addData("Status", "Run Time: " + runtime.toString());
         telemetry.addData("Motors", "Left: (%.2f), Right: (%.2f)", leftPower, rightPower);
         telemetry.addData("Lift", robot.liftMotor.getCurrentPosition() / robot.LIFT_COUNTS_PER_ROT);
+
+        telemetry.addData("Left Pos", robot.leftDrive.getCurrentPosition());
+        telemetry.addData("Right Pos", robot.rightDrive.getCurrentPosition());
 
     }
 

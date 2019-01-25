@@ -18,7 +18,7 @@ public class TestAuto extends CoreAuto {
     @Override
     public void runOpMode() {
         // Add paths for autonomous
-        path.add(new MoveByEncoder(10, 10, 0.5, END));
+        path.add(new MoveByEncoder(10, 10, 0.5, 1.0, END));
 
 
         // Update telemetry

@@ -61,24 +61,26 @@ public class MoveByEncoder extends CoreAction {
         // Turn On RUN_TO_POSITION
         robot.leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
     }
 
     @Override
     public int run() {
         // Set motor power until finished
-        if (robot.leftDrive.isBusy() || robot.rightDrive.isBusy()) {
-            if (robot.leftDrive.isBusy()) {
-                robot.leftDrive.setPower(leftSpeed);
-            }
+        if (robot.rightDrive.isBusy() && robot.leftDrive.isBusy()) {
+            robot.leftDrive.setPower(leftSpeed);
+            robot.rightDrive.setPower(rightSpeed);
 
-            if (robot.rightDrive.isBusy()) {
-                robot.rightDrive.setPower(rightSpeed);
-            }
-
-            telemetry.addData("MoveByEncoder To", "Left: (%2f), Right (%2f)",
+            /*telemetry.addData("MoveByEncoder To", "Left: (%2f), Right (%2f)",
                     leftTarget, rightTarget);
             telemetry.addData("MoveByEncoder At", "Left: (%2f), Right (%2f)",
                     robot.leftDrive.getCurrentPosition(), robot.rightDrive.getCurrentPosition());
+            telemetry.update();*/
+
+            telemetry.addData("Left Pos", robot.leftDrive.getCurrentPosition());
+            telemetry.addData("Right Pos", robot.rightDrive.getCurrentPosition());
+            telemetry.update();
+
             return 0;
 
         }
