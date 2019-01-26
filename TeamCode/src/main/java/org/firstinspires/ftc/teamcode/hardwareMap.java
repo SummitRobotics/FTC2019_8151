@@ -23,7 +23,7 @@ public class hardwareMap {
 
     public void init(HardwareMap aHwMap){
         hwMap = aHwMap;
-        digitalTouch =hwMap.get(DigitalChannel.class, "sensor_digital");
+        digitalTouch =hwMap.get(DigitalChannel.class, "liftButton");
         rightDrive = hwMap.get(DcMotor.class, "right_drive");
         leftDrive = hwMap.get(DcMotor.class, "left_drive");
         liftArm = hwMap.get(DcMotor.class, "lift");

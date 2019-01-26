@@ -1,17 +1,24 @@
 
-package org.firstinspires.ftc.teamcode;
 
+package org.firstinspires.ftc.teamcode.teleop;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.util.Range;
+import org.firstinspires.ftc.teamcode.main.Hardware;
+
+import org.firstinspires.ftc.teamcode.hardwareMap;
+import org.firstinspires.ftc.teamcode.main.Hardware;
 
 /**
  * Created by SHS Robotics - Anne on 10/10/2018.
  */
 
-@TeleOp(name="TeleOPTest", group="Linear Opmode")
-public class TeleOPTest extends LinearOpMode {
+@TeleOp(name="TeleTestHI", group="Linear Opmode")
+public class TeleTestHI extends LinearOpMode {
+
+
+
 
     DigitalChannel digitalTouch;
     double power;
@@ -19,8 +26,9 @@ public class TeleOPTest extends LinearOpMode {
     double FULL_POWER = 1;
     boolean powerThrottled = false;
     //This creates a new hardware map "Robot", which creates all our hardware objects (DcMotors, etc.)
-    hardwareMap robot = new hardwareMap();
+    //org.firstinspires.ftc.teamcode.hardwareMap robot = new hardwareMap();
 
+    private Hardware robot = new Hardware();
     double n_one = 0;
 
     boolean toggleSpeed = false;
@@ -28,22 +36,24 @@ public class TeleOPTest extends LinearOpMode {
     //Example of how to use a Hardwaremap
     //This line runs the "Init" method in the "Robot" class, setting up all of our motors.
     public void runOpMode() {
-        
+
+
         robot.init(hardwareMap);
 
-        digitalTouch =hardwareMap.get(DigitalChannel.class, "sensor_digital");
+        //digitalTouch =hardwareMap.get(DigitalChannel.class, "liftButton");
+
 
         /* "Taker Heads" bot and top Servo */
 
         /* These need to be flipped possible */
 
 
-        digitalTouch.setMode(DigitalChannel.Mode.INPUT);
+        //digitalTouch.setMode(DigitalChannel.Mode.INPUT);
 
         //robot.liftArm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         waitForStart();
-        robot.runtime.reset();
+        //*****robot.runtime.reset();
 
         while (opModeIsActive()) {
 
@@ -70,6 +80,32 @@ public class TeleOPTest extends LinearOpMode {
             leftPower = Range.clip((drive-goBack) + turn, -1.0, 1.0);
             rightPower = Range.clip((drive-goBack) - turn, -1.0, 1.0);
             liftPower = Range.clip(-lift, -1.0, 1.0);
+
+            if (gamepad1.right_bumper) {
+                robot.frontIntakeServo.setPower(0.9);
+                robot.backIntakeServo.setPower(0.9);
+
+            } else if (gamepad1.left_bumper) {
+                robot.frontIntakeServo.setPower(-0.9);
+                robot.backIntakeServo.setPower(-0.9);
+
+            } else {
+                robot.frontIntakeServo.setPower(0);
+                robot.backIntakeServo.setPower(0);
+            }
+
+            if (gamepad1.dpad_up) {
+                robot.leftLiftServo.setPower(-0.4);
+                robot.rightLiftServo.setPower(0.4);
+
+            } else if (gamepad1.dpad_down) {
+                robot.leftLiftServo.setPower(0.3);
+                robot.rightLiftServo.setPower(-0.3);
+
+            } else {
+                robot.leftLiftServo.setPower(0.04);
+                robot.rightLiftServo.setPower(0.04);
+            }
 
             if (quarterSpeed && !toggleSpeed) {
 
@@ -103,11 +139,11 @@ public class TeleOPTest extends LinearOpMode {
             //Set power to the motors defined in the Robot class. actually, there is no robot class.
             robot.leftDrive.setPower(leftPower);
             robot.rightDrive.setPower(rightPower);
-            robot.liftArm.setPower(liftPower);
+            robot.liftMotor.setPower(liftPower);
 
 
 
-            telemetry.addData("Status", "Run Time: " + robot.runtime.toString());
+            ///**********telemetry.addData("Status", "Run Time: " + robot.runtime.toString());
             telemetry.addData("Motors", "left" ,"right", "lift", leftPower, rightPower, liftPower);
             telemetry.addData( "Button", "Button: " + digitalTouch.getState());
             //telemetry.addData( "Intake Power", takerPower);

@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.teleop;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
@@ -14,11 +15,14 @@ public class POVTeleOp extends OpMode{
 
     private Hardware robot = new Hardware();
     private ElapsedTime runtime = new ElapsedTime();
+    DigitalChannel digitalTouch;
 
     @Override
     public void init() {
         // Initialize all hardware
         robot.init(hardwareMap);
+        digitalTouch =hardwareMap.get(DigitalChannel.class, "liftButton");
+        digitalTouch.setMode(DigitalChannel.Mode.INPUT);
 
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
@@ -44,11 +48,13 @@ public class POVTeleOp extends OpMode{
         drive = expPower(drive);
         double turn = gamepad1.right_stick_x;
 
-        // Set power variables
+        // Set power variables for driving
         leftPower = Range.clip((drive + turn), -1.0, 1.0);
         rightPower = Range.clip((drive - turn), -1.0, 1.0);
+
         liftPower = Range.clip(-gamepad1.left_stick_y, -1, 1);
 
+        //intake things
         if (gamepad1.right_bumper) {
             robot.frontIntakeServo.setPower(0.9);
             robot.backIntakeServo.setPower(0.9);
@@ -71,8 +77,14 @@ public class POVTeleOp extends OpMode{
             robot.rightLiftServo.setPower(-0.3);
 
         } else {
-            robot.leftLiftServo.setPower(0.02);
-            robot.rightLiftServo.setPower(0.02);
+            robot.leftLiftServo.setPower(0.05);
+            robot.rightLiftServo.setPower(0.05);
+        }
+
+        // lift power negative when going up positive going down.
+        // digital touch state is `true` when not pressed - `false` when pressed.
+        if (!digitalTouch.getState() && liftPower < 0.0) {
+            liftPower = 0;
         }
 
 

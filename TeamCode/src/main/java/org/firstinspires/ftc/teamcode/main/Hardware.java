@@ -58,7 +58,7 @@ public class Hardware {
         frontIntakeServo = this.hardwareMap.get(CRServo.class, "frontIntakeServo");
         backIntakeServo = this.hardwareMap.get(CRServo.class, "backIntakeServo");
 
-        liftButton = hardwareMap.get(TouchSensor.class, "liftButton");
+       // liftButton = hardwareMap.get(TouchSensor.class, "liftButton");
         colorSensor = hardwareMap.get(ColorSensor.class, "colorSensor");
 
         // Reverse the motor that runs backwards, set servo positions.
