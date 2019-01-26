@@ -1,15 +1,19 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 @Autonomous(name="DepotAutoNew - Crater Alignment",group = "LinearOpMode")
+@Disabled
 public class DepotAutoNew extends LinearOpMode {
+    /*
     Action action = new Action();
     //className objectName = new className()
-    //className() is a constructor
+    //className() is a constructor*/
     @Override
     public void runOpMode() {
+        /*
         action.robot.init(hardwareMap);
         waitForStart();
         action.robot.runtime.reset();
@@ -25,7 +29,7 @@ public class DepotAutoNew extends LinearOpMode {
             action.turnRight(5.5);
             action.goReverse(3.0);
 
-        }
+        }*/
 
     }
 

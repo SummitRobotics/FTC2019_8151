@@ -20,7 +20,7 @@ public class Hardware {
     public CRServo frontIntakeServo;
     public CRServo backIntakeServo;
 
-    public TouchSensor liftButton;
+    public DigitalChannel liftButton;
     public ColorSensor colorSensor;
 
     // Prepare variables for encoder use
@@ -58,12 +58,13 @@ public class Hardware {
         frontIntakeServo = this.hardwareMap.get(CRServo.class, "frontIntakeServo");
         backIntakeServo = this.hardwareMap.get(CRServo.class, "backIntakeServo");
 
-       // liftButton = hardwareMap.get(TouchSensor.class, "liftButton");
+        liftButton = hardwareMap.get(DigitalChannel.class, "liftButton");
         colorSensor = hardwareMap.get(ColorSensor.class, "colorSensor");
 
         // Reverse the motor that runs backwards, set servo positions.
         leftDrive.setDirection(DcMotor.Direction.FORWARD);
         rightDrive.setDirection(DcMotor.Direction.FORWARD);
         liftMotor.setDirection(DcMotor.Direction.REVERSE);
+        sampleMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 }

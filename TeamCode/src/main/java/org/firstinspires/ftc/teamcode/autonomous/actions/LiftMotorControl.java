@@ -34,6 +34,10 @@ public class LiftMotorControl extends CoreAction {
     public int run() {
         // Set motor power until finished
         if (robot.liftMotor.isBusy()) {
+            if((!robot.liftButton.getState()) && (robot.liftMotor.getPower() < 0)){
+                robot.liftMotor.setPower(0);
+                return nextPos;
+            }
             robot.liftMotor.setPower(speed);
             return 0;
         }

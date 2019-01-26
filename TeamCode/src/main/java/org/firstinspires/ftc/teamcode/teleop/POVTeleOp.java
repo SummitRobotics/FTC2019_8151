@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
@@ -15,14 +16,13 @@ public class POVTeleOp extends OpMode{
 
     private Hardware robot = new Hardware();
     private ElapsedTime runtime = new ElapsedTime();
-    DigitalChannel digitalTouch;
 
     @Override
     public void init() {
         // Initialize all hardware
         robot.init(hardwareMap);
-        digitalTouch =hardwareMap.get(DigitalChannel.class, "liftButton");
-        digitalTouch.setMode(DigitalChannel.Mode.INPUT);
+
+
 
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
@@ -77,13 +77,32 @@ public class POVTeleOp extends OpMode{
             robot.rightLiftServo.setPower(-0.3);
 
         } else {
-            robot.leftLiftServo.setPower(0.05);
-            robot.rightLiftServo.setPower(0.05);
+            robot.leftLiftServo.setPower(0.15);
+            robot.rightLiftServo.setPower(0.15);
         }
+
+        //TODO - toggle
+        if(gamepad1.b){
+            leftPower*= 0.25;
+            rightPower*= 0.25;
+            liftPower*= 0.25;
+        }
+
+        if(gamepad1.dpad_left){
+            robot.sampleMotor.setPower(0.25);
+        }
+        else if(gamepad1.dpad_right){
+            robot.sampleMotor.setPower(-0.25);
+        }
+        else{
+            robot.sampleMotor.setPower(0);
+        }
+
+
 
         // lift power negative when going up positive going down.
         // digital touch state is `true` when not pressed - `false` when pressed.
-        if (!digitalTouch.getState() && liftPower < 0.0) {
+        if (!robot.liftButton.getState() && liftPower < 0.0) {
             liftPower = 0;
         }
 

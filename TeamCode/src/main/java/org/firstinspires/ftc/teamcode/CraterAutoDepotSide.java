@@ -2,15 +2,17 @@ package org.firstinspires.ftc.teamcode;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 @Autonomous(name="CraterAutoDepotSide", group="LinearOpMode")
+@Disabled
 public class CraterAutoDepotSide extends LinearOpMode {
-    Action action = new Action();
-    boolean isFinished;
+    /*Action action = new Action();
+    boolean isFinished;*/
 
     @Override
-    public void runOpMode() {
+    public void runOpMode() {/*
         action.robot.init(hardwareMap);
         waitForStart();
         action.robot.runtime.reset();
@@ -25,6 +27,6 @@ public class CraterAutoDepotSide extends LinearOpMode {
                 action.robotStop();
                 action.robot.liftArm.setPower(0);
             }
-        }
+        }*/
     }
 }

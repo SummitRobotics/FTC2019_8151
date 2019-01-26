@@ -2,15 +2,17 @@ package org.firstinspires.ftc.teamcode;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 @Autonomous(name="Aidan's Auto", group = "Linear Opmode")
-public class sampleAuto extends LinearOpMode {
+@Disabled
+public class sampleAuto extends LinearOpMode {/*
     Action action = new Action();
-    boolean isFinished;
+    boolean isFinished;*/
 
     @Override
-    public void runOpMode() throws InterruptedException {
+    public void runOpMode() throws InterruptedException {/*
         action.robot.init(hardwareMap);
 
         waitForStart();
@@ -28,6 +30,6 @@ public class sampleAuto extends LinearOpMode {
                 action.robot.liftArm.setPower(0);
             }
 
-        }
+        }*/
     }
 }
