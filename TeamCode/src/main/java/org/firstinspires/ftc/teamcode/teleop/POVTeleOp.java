@@ -77,8 +77,8 @@ public class POVTeleOp extends OpMode{
             robot.rightLiftServo.setPower(-0.3);
 
         } else {
-            robot.leftLiftServo.setPower(0.15);
-            robot.rightLiftServo.setPower(0.15);
+            robot.leftLiftServo.setPower(-0.08);
+            robot.rightLiftServo.setPower(0.08);
         }
 
         //TODO - toggle

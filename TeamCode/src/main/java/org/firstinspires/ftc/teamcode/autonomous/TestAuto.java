@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.autonomous;
 
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+
+import org.firstinspires.ftc.teamcode.autonomous.actions.ArmControl;
 import org.firstinspires.ftc.teamcode.autonomous.actions.CoreAction;
 import org.firstinspires.ftc.teamcode.autonomous.actions.LiftMotorControl;
 import org.firstinspires.ftc.teamcode.autonomous.actions.MoveByEncoder;
@@ -18,13 +20,21 @@ public class TestAuto extends CoreAuto {
     @Override
     public void runOpMode() {
         // Add paths for autonomous
-        path.add(new LiftMotorControl(3.5, 1, 1));
-        path.add(new TurnByEncoder(-0.2222 * Math.PI, .5,1));
-        path.add(new MoveByEncoder(-3,1,1));
-        path.add(new TurnByEncoder(0.2222 * Math.PI,.5,1));
-        path.add(new MoveByEncoder(-3,1,1));
-        path.add(new TurnByEncoder(0.5555 * Math.PI,.5,1));
-        path.add(new MoveByEncoder(132,1,END));
+
+        //test action to be deleted
+        path.add(new LiftMotorControl(4.4, 1, 1));
+        path.add(new MoveByEncoder(3.0, .5, -.5, 1));
+        path.add(new MoveByEncoder(0.3,-.5,END));
+
+        /*
+        path.add(new MoveByEncoder(0.175,-0.5,-0.5,1));
+        path.add(new MoveByEncoder(0.25,-0.5,0.5,1));
+        path.add(new MoveByEncoder(1.5,-0.5,-0.5,1));
+        path.add(new ArmControl(0.5, 0.7, 1));
+        path.add(new ArmControl (0.5,-0.7,1));
+        path.add(new MoveByEncoder(2.0,-0.5,0.5,1));
+        path.add(new MoveByEncoder (4.5,-0.5,-0.5,END));
+        */
 
         // Update telemetry
         telemetry.addData("Status", "Initialized");

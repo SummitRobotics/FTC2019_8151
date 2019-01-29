@@ -10,6 +10,7 @@ public class LiftMotorControl extends CoreAction {
     private double speed;
     private int ticks;
     private int target;
+    Telemetry telemetry;
 
     public LiftMotorControl(double rotations, double speed, int nextPos) {
         this.speed = speed;
@@ -19,6 +20,8 @@ public class LiftMotorControl extends CoreAction {
 
     @Override
     public void actionInit(HardwareMap hardwareMap, Telemetry telemetry) {
+        this.telemetry = telemetry;
+
         robot.init(hardwareMap);
 
         // Prepare motors for encoder movement
@@ -28,6 +31,9 @@ public class LiftMotorControl extends CoreAction {
 
         // Turn On RUN_TO_POSITION
         robot.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        telemetry.addData("Finished", false);
+        telemetry.update();
     }
 
     @Override
@@ -35,6 +41,8 @@ public class LiftMotorControl extends CoreAction {
         // Set motor power until finished
         if (robot.liftMotor.isBusy()) {
             if((!robot.liftButton.getState()) && (robot.liftMotor.getPower() < 0)){
+                telemetry.addData("Finished",true);
+                telemetry.update();
                 robot.liftMotor.setPower(0);
                 return nextPos;
             }
