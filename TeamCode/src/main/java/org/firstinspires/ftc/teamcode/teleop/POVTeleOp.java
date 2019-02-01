@@ -42,6 +42,7 @@ public class POVTeleOp extends OpMode{
         double leftPower;
         double rightPower;
         double liftPower;
+        double sp;
 
         // Get gamepad inputs
         double drive = gamepad1.right_trigger - gamepad1.left_trigger;
@@ -81,24 +82,28 @@ public class POVTeleOp extends OpMode{
             robot.rightLiftServo.setPower(0.08);
         }
 
+        if(gamepad1.dpad_left){
+            sp = 0.25;
+        }
+        else if(gamepad1.dpad_right){
+            sp=-0.25;
+        }
+        else{
+            sp=0;
+        }
+
         //TODO - toggle
         if(gamepad1.b){
+
             leftPower*= 0.25;
             rightPower*= 0.25;
             liftPower*= 0.25;
-        }
-
-        if(gamepad1.dpad_left){
-            robot.sampleMotor.setPower(0.25);
-        }
-        else if(gamepad1.dpad_right){
-            robot.sampleMotor.setPower(-0.25);
-        }
-        else{
-            robot.sampleMotor.setPower(0);
+            sp*=4;
         }
 
 
+
+        robot.sampleMotor.setPower(sp);
 
         // lift power negative when going up positive going down.
         // digital touch state is `true` when not pressed - `false` when pressed.
