@@ -22,10 +22,12 @@ public class TestAuto extends CoreAuto {
         // Add paths for autonomous
 
         //test action to be deleted
-        path.add(new LiftMotorControl(4.4, 1, 1));
-        path.add(new MoveByEncoder(3.0, .5, -.5, 1));
-        path.add(new MoveByEncoder(0.3,-.5,END));
-
+        //path.add(new LiftMotorControl(4, 1, 1));
+        path.add(new TurnByEncoder(-0.75, 0.7, 1));
+        path.add(new MoveByEncoder(1.5,-.5,-.55,1));
+        path.add(new TurnByEncoder(0.75,-0.5, 1));
+        path.add(new MoveByEncoder(5,-.5 ,-.55,END));
+        //path.add(new LiftMotorControl(-2, 1, END));
         /*
         path.add(new MoveByEncoder(0.175,-0.5,-0.5,1));
         path.add(new MoveByEncoder(0.25,-0.5,0.5,1));
@@ -46,5 +48,7 @@ public class TestAuto extends CoreAuto {
 
         // Run the paths created earlier
         runPath(path);
+
+
     }
 }

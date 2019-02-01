@@ -20,6 +20,7 @@ public class MoveByEncoder extends CoreAction {
         this.leftSpeed = speed;
         this.rightSpeed = speed;
         this.nextPos = nextPos;
+        this.time = time;
         this.leftTime = time;
         this.rightTime = time;
     }
@@ -66,7 +67,8 @@ public class MoveByEncoder extends CoreAction {
             if (runtime.seconds() < leftTime) {
                 robot.leftDrive.setPower(leftSpeed);
 
-            } if (runtime.seconds() < rightTime) {
+            }
+            if (runtime.seconds() < rightTime) {
                 robot.rightDrive.setPower(rightSpeed);
             }
 
