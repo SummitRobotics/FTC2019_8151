@@ -15,7 +15,7 @@ public class LiftMotorControl extends CoreAction {
     public LiftMotorControl(double rotations, double speed, int nextPos) {
         this.speed = speed;
         this.nextPos = nextPos;
-        this.ticks = (int) (rotations * robot.LIFT_COUNTS_PER_ROT);
+
     }
 
     @Override

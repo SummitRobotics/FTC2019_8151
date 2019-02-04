@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.autonomous.actions.ArmControl;
 import org.firstinspires.ftc.teamcode.autonomous.actions.CoreAction;
+import org.firstinspires.ftc.teamcode.autonomous.actions.Land;
 import org.firstinspires.ftc.teamcode.autonomous.actions.LiftMotorControl;
 import org.firstinspires.ftc.teamcode.autonomous.actions.MoveByEncoder;
 import org.firstinspires.ftc.teamcode.autonomous.actions.TurnByEncoder;
@@ -21,22 +22,15 @@ public class TestAuto extends CoreAuto {
     public void runOpMode() {
         // Add paths for autonomous
 
-        //test action to be deleted
-        path.add(new LiftMotorControl(4, 1, 1));
-        path.add(new TurnByEncoder(-0.40, 0.4, 1));
-        path.add(new MoveByEncoder(1.5,-1,-1,1));
-        path.add(new TurnByEncoder(0.50,-0.5, 1));
-        path.add(new MoveByEncoder(4,-1 ,-1,END));
-        //path.add(new LiftMotorControl(-2, 1, END));
-        /*
-        path.add(new MoveByEncoder(0.175,-0.5,-0.5,1));
-        path.add(new MoveByEncoder(0.25,-0.5,0.5,1));
-        path.add(new MoveByEncoder(1.5,-0.5,-0.5,1));
-        path.add(new ArmControl(0.5, 0.7, 1));
-        path.add(new ArmControl (0.5,-0.7,1));
-        path.add(new MoveByEncoder(2.0,-0.5,0.5,1));
-        path.add(new MoveByEncoder (4.5,-0.5,-0.5,END));
-        */
+      // landing off lander and reseting pos
+        path.add(new Land(hardwareMap, telemetry));
+
+
+       //path.add(new TurnByEncoder(-0.40, 0.4, 1));
+
+
+        path.add(new MoveByEncoder(0,-1,-1,END));
+
 
         // Update telemetry
         telemetry.addData("Status", "Initialized");
