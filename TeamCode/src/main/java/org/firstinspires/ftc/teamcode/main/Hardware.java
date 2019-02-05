@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.main;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -19,6 +20,7 @@ public class Hardware {
     public CRServo rightLiftServo;
     public CRServo frontIntakeServo;
     public CRServo backIntakeServo;
+    public BNO055IMU gyro;
 
     public DigitalChannel liftButton;
     public ColorSensor colorSensor;
@@ -57,6 +59,7 @@ public class Hardware {
         rightLiftServo = this.hardwareMap.get(CRServo.class, "rightLiftServo");
         frontIntakeServo = this.hardwareMap.get(CRServo.class, "frontIntakeServo");
         backIntakeServo = this.hardwareMap.get(CRServo.class, "backIntakeServo");
+        gyro = this.hardwareMap.get(BNO055IMU.class, "imu");
 
         liftButton = hardwareMap.get(DigitalChannel.class, "liftButton");
         colorSensor = hardwareMap.get(ColorSensor.class, "colorSensor");
@@ -66,5 +69,6 @@ public class Hardware {
         rightDrive.setDirection(DcMotor.Direction.FORWARD);
         liftMotor.setDirection(DcMotor.Direction.REVERSE);
         sampleMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
     }
 }

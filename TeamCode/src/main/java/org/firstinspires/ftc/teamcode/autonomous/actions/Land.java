@@ -32,7 +32,7 @@ public class Land extends CoreAction {
     public int lastAngles;
     Orientation             firstAngle = new Orientation();
 
-    BNO055IMU               imu;
+
 
 
 
@@ -47,7 +47,9 @@ public class Land extends CoreAction {
         this.rightSpeed = -speed;
         this.leftTicks = (int) (radians * robot.DRIVE_COUNTS_PER_RADIAN);
         this.rightTicks = (int) (radians * robot.DRIVE_COUNTS_PER_RADIAN);
-        this.time = 0.2;
+
+        //backup
+        this.time = 1;
 
 
 
@@ -94,14 +96,14 @@ public class Land extends CoreAction {
         // on a Core Device Interface Module, configured to be a sensor of type "AdaFruit IMU",
         // and named "imu".
 
-        imu = hardwareMap.get(BNO055IMU.class, "imu");
 
-        imu.initialize(parameters);
+
+        robot.gyro.initialize(parameters);
 
         telemetry.addData("Mode", "calibrating...");
         telemetry.update();
 
-        sleep(1000);
+        sleep(200);
 
 
 
@@ -148,7 +150,7 @@ public class Land extends CoreAction {
 
 
 
-        firstAngle = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
+        firstAngle = robot.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
 
         done = -1;
     }
@@ -226,28 +228,49 @@ public class Land extends CoreAction {
     // fix red lines
     public void corectangle(){
 
-        if (firstAngle.secondAngle > imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).secondAngle){
+        telemetry.addData("firstangle", firstAngle.firstAngle);
+        telemetry.addData("curentangle", robot.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle);
+        telemetry.update();
 
-            while (firstAngle.secondAngle > imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).secondAngle){
 
-                robot.leftDrive.setPower(.2);
+        if (firstAngle.firstAngle > robot.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle){
 
+            while (firstAngle.firstAngle > robot.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle + 2){
+
+
+                robot.leftDrive.setPower(-.4);
+                robot.rightDrive.setPower(.4);
+
+                telemetry.addData("firstangle", firstAngle.firstAngle);
+                telemetry.addData("curentangle", robot.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle);
+                telemetry.update();
             }
 
 
         }
 
-        if (firstAngle.secondAngle < imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).secondAngle){
+        if (firstAngle.firstAngle < robot.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle){
 
-            while (firstAngle.secondAngle < imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).secondAngle){
+            while (firstAngle.firstAngle < robot.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle - 2){
 
-                robot.leftDrive.setPower(-.2);
+                robot.rightDrive.setPower(-.4);
+                robot.leftDrive.setPower(.4);
 
+                telemetry.addData("firstangle", firstAngle.firstAngle);
+                telemetry.addData("curentangle", robot.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle);
+                telemetry.update();
             }
 
         }
+
+        telemetry.addData("firstangle", firstAngle.firstAngle);
+        telemetry.addData("curentangle", robot.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle);
+        telemetry.update();
+
+
 
         robot.leftDrive.setPower(0);
+        done = 4;
     }
 
 
