@@ -177,6 +177,9 @@ public class POVTeleOp extends OpMode{
             // and named "imu".
 
             robot.gyro.initialize(parameters);
+
+            return 1;
+
         }
 
         while (gamepad1.y){return 1;}

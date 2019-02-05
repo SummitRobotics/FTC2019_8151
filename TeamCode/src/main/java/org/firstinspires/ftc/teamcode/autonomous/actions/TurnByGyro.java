@@ -15,6 +15,7 @@ public class TurnByGyro extends CoreAction {
 
     public TurnByGyro(int target, int nextPos) {
 
+        // compairs the curent position (as last calibrated) to the target angle
         this.target = target;
         this.nextPos = nextPos;
     }

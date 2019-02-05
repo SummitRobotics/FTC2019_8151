@@ -22,7 +22,7 @@ public class TestAuto extends CoreAuto {
     public void runOpMode() {
         // Add paths for autonomous
 
-      // landing off lander and reseting pos
+      // landing off lander and resetting pos
 
         path.add(new CalabrateGyro(1));
         path.add(new LiftMotorControl(2.2,1,1));
@@ -31,6 +31,7 @@ public class TestAuto extends CoreAuto {
         path.add(new TurnByGyro(0,1));
 
 
+        // doing other things
         path.add(new MoveByTime(0,-1,-1,END));
 
 
