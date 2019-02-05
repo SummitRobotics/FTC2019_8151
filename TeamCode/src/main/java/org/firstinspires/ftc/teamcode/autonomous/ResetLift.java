@@ -4,7 +4,7 @@ package org.firstinspires.ftc.teamcode.autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.autonomous.actions.CoreAction;
 import org.firstinspires.ftc.teamcode.autonomous.actions.LiftMotorControl;
-import org.firstinspires.ftc.teamcode.autonomous.actions.MoveByEncoder;
+
 import java.util.ArrayList;
 
 @Autonomous(name="ResetLift", group="LinearOpMode")

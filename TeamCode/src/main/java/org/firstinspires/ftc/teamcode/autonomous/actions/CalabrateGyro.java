@@ -14,7 +14,7 @@ import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 
 import static android.os.SystemClock.sleep;
 
-public class calabrateGyro extends CoreAction {
+public class CalabrateGyro extends CoreAction {
 
     private double speed;
     private double time;
@@ -23,7 +23,7 @@ public class calabrateGyro extends CoreAction {
     public Orientation calibratedAngles;
 
 
-    public calabrateGyro(int nextPos) {
+    public CalabrateGyro(int nextPos) {
 
         this.nextPos = nextPos;
     }

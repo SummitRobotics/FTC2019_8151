@@ -3,12 +3,12 @@ package org.firstinspires.ftc.teamcode.autonomous;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
-import org.firstinspires.ftc.teamcode.autonomous.actions.ArmControl;
 import org.firstinspires.ftc.teamcode.autonomous.actions.CoreAction;
-import org.firstinspires.ftc.teamcode.autonomous.actions.Land;
 import org.firstinspires.ftc.teamcode.autonomous.actions.LiftMotorControl;
-import org.firstinspires.ftc.teamcode.autonomous.actions.MoveByEncoder;
+import org.firstinspires.ftc.teamcode.autonomous.actions.MoveByTime;
 import org.firstinspires.ftc.teamcode.autonomous.actions.TurnByEncoder;
+import org.firstinspires.ftc.teamcode.autonomous.actions.CalabrateGyro;
+import org.firstinspires.ftc.teamcode.autonomous.actions.TurnByGyro;
 
 import java.util.ArrayList;
 
@@ -23,13 +23,15 @@ public class TestAuto extends CoreAuto {
         // Add paths for autonomous
 
       // landing off lander and reseting pos
-        path.add(new Land(hardwareMap, telemetry));
+
+        path.add(new CalabrateGyro(1));
+        path.add(new LiftMotorControl(2.2,1,1));
+        path.add(new TurnByEncoder(-.6,.4,1));
+        path.add(new MoveByTime(1,-.5,1));
+        path.add(new TurnByGyro(0,1));
 
 
-       //path.add(new TurnByEncoder(-0.40, 0.4, 1));
-
-
-        path.add(new MoveByEncoder(0,-1,-1,END));
+        path.add(new MoveByTime(0,-1,-1,END));
 
 
         // Update telemetry

@@ -8,12 +8,12 @@ import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
 
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-public class turnByGyro extends CoreAction {
+public class TurnByGyro extends CoreAction {
 
     int target;
     ElapsedTime runtime = new ElapsedTime();
 
-    public turnByGyro(int target, int nextPos) {
+    public TurnByGyro(int target, int nextPos) {
 
         this.target = target;
         this.nextPos = nextPos;
