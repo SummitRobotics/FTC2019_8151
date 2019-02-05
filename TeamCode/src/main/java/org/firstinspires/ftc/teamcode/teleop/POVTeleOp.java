@@ -133,7 +133,6 @@ public class POVTeleOp extends OpMode{
         }
 
 
-
         robot.sampleMotor.setPower(sp);
 
         // lift power negative when going up positive going down.
@@ -160,23 +159,17 @@ public class POVTeleOp extends OpMode{
 
     public int corectTip(){
 
-        if (gamepad1.y){return 1;}
+        while (gamepad1.y){return 1;}
 
 
-        else {
-
-
-            while (30 < Math.abs(robot.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).secondAngle)) {
+        while (30 < Math.abs(robot.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).secondAngle)) {
 
                 return -1;
             }
 
-        }
 
         return 1;
     }
-
-
 
 
     @Override
