@@ -270,6 +270,7 @@ public class Land extends CoreAction {
 
 
         robot.leftDrive.setPower(0);
+        robot.rightDrive.setPower(0);
         done = 4;
     }
 
