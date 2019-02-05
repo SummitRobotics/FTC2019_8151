@@ -160,16 +160,20 @@ public class POVTeleOp extends OpMode{
 
     public int corectTip(){
 
-        while (30 < Math.abs(robot.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).secondAngle)){
+        if (gamepad1.y){return 1;}
 
-            return -1;
+
+        else {
+
+
+            while (30 < Math.abs(robot.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).secondAngle)) {
+
+                return -1;
+            }
+
         }
 
-
-
-
-
-     return 1;
+        return 1;
     }
 
 
