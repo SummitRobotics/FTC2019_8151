@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.teleop;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
@@ -9,7 +10,14 @@ import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
+import org.firstinspires.ftc.robotcore.external.navigation.Acceleration;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
+import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
+import org.firstinspires.ftc.robotcore.external.navigation.Orientation;
 import org.firstinspires.ftc.teamcode.main.Hardware;
+
+import static android.os.SystemClock.sleep;
 
 @TeleOp(name="POVTeleOp", group="Iterative Opmode")
 public class POVTeleOp extends OpMode{
@@ -23,6 +31,29 @@ public class POVTeleOp extends OpMode{
         robot.init(hardwareMap);
 
 
+        Orientation angles;
+        Acceleration gravity;
+
+
+        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+
+        parameters.mode                = BNO055IMU.SensorMode.IMU;
+        parameters.angleUnit           = BNO055IMU.AngleUnit.DEGREES;
+        parameters.accelUnit           = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        parameters.loggingEnabled      = false;
+
+        // Retrieve and initialize the IMU. We expect the IMU to be attached to an I2C port
+        // on a Core Device Interface Module, configured to be a sensor of type "AdaFruit IMU",
+        // and named "imu".
+
+
+
+        robot.gyro.initialize(parameters);
+
+        telemetry.addData("Mode", "calibrating...");
+        telemetry.update();
+
+        sleep(200);
 
         // Tell the driver that initialization is complete.
         telemetry.addData("Status", "Initialized");
@@ -113,8 +144,9 @@ public class POVTeleOp extends OpMode{
 
 
         // Send calculated power to hardware
-        robot.leftDrive.setPower(leftPower);
-        robot.rightDrive.setPower(rightPower);
+
+        robot.leftDrive.setPower(leftPower * corectTip());
+        robot.rightDrive.setPower(rightPower * corectTip());
         robot.liftMotor.setPower(liftPower);
 
         // Show the elapsed game time and wheel power.
@@ -123,6 +155,25 @@ public class POVTeleOp extends OpMode{
         telemetry.addData("Lift", robot.liftMotor.getCurrentPosition() / robot.LIFT_COUNTS_PER_ROT);
 
     }
+
+    // corects the robot tipping by using the gyro
+
+    public int corectTip(){
+
+        while (30 < Math.abs(robot.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).secondAngle)){
+
+            return -1;
+        }
+
+
+
+
+
+     return 1;
+    }
+
+
+
 
     @Override
     public void stop() { telemetry.addData("Status", "Stopped"); }
