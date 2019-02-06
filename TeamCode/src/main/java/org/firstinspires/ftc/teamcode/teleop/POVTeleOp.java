@@ -155,7 +155,7 @@ public class POVTeleOp extends OpMode{
 
     }
 
-    // corects the robot tipping by using the gyro
+    // keeps the robot from tipping by using the gyro
 
     public int corectTip(){
 
