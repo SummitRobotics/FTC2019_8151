@@ -38,10 +38,10 @@ public class Land extends CoreAction {
 
     public Land(HardwareMap hardwareMap, Telemetry telemetry) {
         //landing
-        ticks = (int) (4 * robot.LIFT_COUNTS_PER_ROT);
+        ticks = (int) (3.8 * robot.LIFT_COUNTS_PER_ROT);
 
         //turning
-        double radians = -0.60;
+        double radians = -1.0;
         double speed = .4;
         this.leftSpeed = speed;
         this.rightSpeed = -speed;

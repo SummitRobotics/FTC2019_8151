@@ -109,8 +109,8 @@ public class POVTeleOp extends OpMode{
             robot.rightLiftServo.setPower(-0.3);
 
         } else {
-            robot.leftLiftServo.setPower(-0.08);
-            robot.rightLiftServo.setPower(0.08);
+            robot.leftLiftServo.setPower(-0.04);
+            robot.rightLiftServo.setPower(0.04);
         }
 
         if(gamepad1.dpad_left){
@@ -123,7 +123,6 @@ public class POVTeleOp extends OpMode{
             sp=0;
         }
 
-        //TODO - toggle
         if(gamepad1.b){
 
             leftPower*= 0.25;
