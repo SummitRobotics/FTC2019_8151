@@ -26,14 +26,11 @@ public class TestAuto extends CoreAuto {
         // Add paths for autonomous
 
       // landing off lander and resetting pos
-
-       /* path.add(new CalabrateGyro(1));
-        path.add(new LiftMotorControl(2.2,1,1));
-        path.add(new TurnByEncoder(-.6,.4,1));
-        path.add(new MoveByTime(1,-.5,1));
-        path.add(new TurnByGyro(0,1));*/
-
        path.add(new Land(hardwareMap, telemetry));
+        path.add(new MoveByTime(2.25,-.5,1));
+        //TODO add intake control in auto
+        path.add(new TurnByEncoder(2 ,.4,1));
+        path.add(new MoveByTime(3,.5,END));
 
 
         // doing other things
