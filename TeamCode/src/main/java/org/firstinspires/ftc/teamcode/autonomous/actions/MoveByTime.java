@@ -57,6 +57,9 @@ public class MoveByTime extends CoreAction {
         robot.init(hardwareMap);
         runtime.reset();
 
+        robot.leftDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.rightDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
     }
 
     @Override

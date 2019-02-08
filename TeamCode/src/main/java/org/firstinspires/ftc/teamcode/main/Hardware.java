@@ -20,6 +20,7 @@ public class Hardware {
     public CRServo rightLiftServo;
     public CRServo frontIntakeServo;
     public CRServo backIntakeServo;
+    public Servo drop;
     public BNO055IMU gyro;
 
     public DigitalChannel liftButton;
@@ -59,6 +60,7 @@ public class Hardware {
         rightLiftServo = this.hardwareMap.get(CRServo.class, "rightLiftServo");
         frontIntakeServo = this.hardwareMap.get(CRServo.class, "frontIntakeServo");
         backIntakeServo = this.hardwareMap.get(CRServo.class, "backIntakeServo");
+        drop = this.hardwareMap.get(Servo.class, "drop");
         gyro = this.hardwareMap.get(BNO055IMU.class, "imu");
 
         liftButton = hardwareMap.get(DigitalChannel.class, "liftButton");

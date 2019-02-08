@@ -132,7 +132,13 @@ public class POVTeleOp extends OpMode{
         }
 
 
-        robot.sampleMotor.setPower(sp);
+        if(gamepad1.a) {
+
+            robot.drop.setPosition(0);
+
+        }
+
+        else {robot.drop.setPosition(.5);}
 
         // lift power negative when going up positive going down.
         // digital touch state is `true` when not pressed - `false` when pressed.

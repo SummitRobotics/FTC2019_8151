@@ -27,16 +27,11 @@ public class TestAuto extends CoreAuto {
 
       // landing off lander and resetting pos
        path.add(new Land(hardwareMap, telemetry));
-        path.add(new MoveByTime(2.25,-.5,1));
+        path.add(new MoveByTime(1.5,-.5,1));
         //TODO add intake control in auto
-        path.add(new TurnByEncoder(2 ,.4,1));
-        path.add(new MoveByTime(3,.5,END));
+        path.add(new TurnByEncoder(3 ,.4,1));
+        path.add(new MoveByTime(3,-.5,END));
 
-
-        // doing other things
-        telemetry.addData("motion type", "time based");
-        telemetry.update();
-        path.add(new MoveByTime(0,-.5,-.5,END));
 
 
 
