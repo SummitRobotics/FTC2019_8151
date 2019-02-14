@@ -38,10 +38,10 @@ public class Land extends CoreAction {
 
     public Land(HardwareMap hardwareMap, Telemetry telemetry) {
         //landing
-        ticks = (int) (4 * robot.LIFT_COUNTS_PER_ROT);
+        ticks = (int) (3.8 * robot.LIFT_COUNTS_PER_ROT);
 
         //turning
-        double radians = -0.60;
+        double radians = -1.0;
         double speed = .4;
         this.leftSpeed = speed;
         this.rightSpeed = -speed;
@@ -49,7 +49,7 @@ public class Land extends CoreAction {
         this.rightTicks = (int) (radians * robot.DRIVE_COUNTS_PER_RADIAN);
 
         //backup
-        this.time = 1;
+        this.time = .2;
 
 
 
@@ -172,36 +172,41 @@ public class Land extends CoreAction {
 
     }
 
-    public void turn(){
+    public void turn() {
 
-        // Prepare motors for encoder movement
-        leftTarget = robot.leftDrive.getCurrentPosition() + leftTicks;
-        rightTarget = robot.rightDrive.getCurrentPosition() - rightTicks;
+        robot.leftDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.rightDrive.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        robot.leftDrive.setTargetPosition(leftTarget);
-        robot.rightDrive.setTargetPosition(rightTarget);
+        telemetry.addData("firstangle", firstAngle.firstAngle);
+        telemetry.addData("curentangle", robot.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle);
+        telemetry.update();
 
-        // Turn On RUN_TO_POSITION
-        robot.leftDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        robot.rightDrive.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-        while (robot.leftDrive.isBusy() && robot.rightDrive.isBusy()) {
-            telemetry.addData("turning", "ttttttttttttt");
-            telemetry.addData("Left Current Pos", robot.leftDrive.getCurrentPosition());
-            telemetry.addData("Right Current Pos", robot.rightDrive.getCurrentPosition());
-            telemetry.addData("Left Expected Pos", robot.leftDrive.getTargetPosition());
-            telemetry.addData("Right Expected Pos", robot.rightDrive.getTargetPosition());
-            telemetry.update();
+        if (-30 < robot.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle) {
 
-            robot.leftDrive.setPower(leftSpeed);
-            robot.rightDrive.setPower(rightSpeed);
+            while (-30 < robot.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle + 2) {
+
+
+                robot.leftDrive.setPower(.8);
+                robot.rightDrive.setPower(-.8);
+
+                telemetry.addData("firstangle", firstAngle.firstAngle);
+                telemetry.addData("curentangle", robot.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle);
+                telemetry.update();
+            }
+
+
         }
 
-        done = 2;
+
+        telemetry.addData("firstangle", firstAngle.firstAngle);
+        telemetry.addData("curentangle", robot.gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES).firstAngle);
+        telemetry.update();
+
+
         robot.leftDrive.setPower(0);
         robot.rightDrive.setPower(0);
-        telemetry.addData("turned", "rererererer");
-        telemetry.update();
+        done = 2;
     }
 
     public void backup(){
